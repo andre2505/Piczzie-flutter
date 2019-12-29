@@ -1,16 +1,15 @@
 import 'package:http/http.dart' as http;
+import 'package:piczzie/service/service_locator.dart';
 import 'package:piczzie/model/user.dart';
-import 'package:piczzie/service/base_service.dart';
-import 'dart:convert';
+import 'package:piczzie/service/base_network/api_base_helper.dart';
 
-import 'package:piczzie/service/result_service.dart';
+class UserService {
 
-class UserService extends BaseService {
-  UserService() : super();
+  ApiBaseHelper _helper = locator<ApiBaseHelper>();
 
-  Future<ResultService> getUser(User user) async {
+  Future<User> fetchUser(User user) async {
     final response =
-        await http.post('http://localhost:8080/login', body: user.toJson());
-    return resultService(response, User.fromJson(json.decode(response.body)));
+        await _helper.get('/login');
+    return User.fromJson(response);
   }
 }

@@ -1,8 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:piczzie/feature/base_view.dart';
-import 'package:piczzie/ressources/color.dart';
-import 'package:piczzie/feature/login/login_model.dart';
 
 class HomeView extends StatefulWidget {
   HomeView({Key key, this.title}) : super(key: key);
@@ -16,14 +13,13 @@ class HomeView extends StatefulWidget {
 class _homeViewState extends State<HomeView> {
   @override
   Widget build(BuildContext context) {
-    return BaseView<LoginModel>(
-        builder: (context, child, model) => CupertinoPageScaffold(
-          navigationBar: CupertinoNavigationBar(
+    return Scaffold(
+          appBar: AppBar(
             backgroundColor: Colors.white,
           ),
-          child: Container(
+          body: Container(
             child: CupertinoTextField(),
           ),
-        ));
+    );
   }
 }
