@@ -14,7 +14,8 @@ import 'package:piczzie/service/base_network/navigation_service.dart';
 void main() {
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark);
   setupLocator();
-  runApp(BlocProvider(
+  runApp(
+    BlocProvider(
       create: (context) {
         return MainBloc(context);
       },
@@ -28,22 +29,25 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-          title: 'Picczie',
-          theme: ThemeData(
-            // is not restarted.
-            primarySwatch: CustomColors.greenCustom,
-          ),
-          localizationsDelegates: [
-            GlobalMaterialLocalizations.delegate,
-            GlobalWidgetsLocalizations.delegate,
-            const AppLocalizationsDelegate(),
-          ],
-          supportedLocales: [ const Locale('en', ''), const Locale('fr', ''), const Locale('messages', '')],
-          navigatorKey: locator<NavigationService>().navigatorKey,
-          home: LoginView(title: 'Flutter Demo Home Page'),
-          routes: <String, WidgetBuilder>{
-            "/homeView": (BuildContext context) => HomeView(),
-          },
-        );
+      title: 'Picczie',
+      theme: ThemeData(
+        // is not restarted.
+        primarySwatch: CustomColors.greenCustom,
+      ),
+      localizationsDelegates: [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        const AppLocalizationsDelegate(),
+      ],
+      supportedLocales: [
+        const Locale('fr', ''),
+        const Locale('messages', '')
+      ],
+      navigatorKey: locator<NavigationService>().navigatorKey,
+      home: LoginView(title: 'Flutter Demo Home Page'),
+      routes: <String, WidgetBuilder>{
+        "/homeView": (BuildContext context) => HomeView(),
+      },
+    );
   }
 }

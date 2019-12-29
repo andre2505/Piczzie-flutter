@@ -6,7 +6,7 @@ import 'package:piczzie/l10n/messages_all.dart';
 class AppLocalizations {
   static Future<AppLocalizations> load(Locale locale) {
     final String name =
-    locale.countryCode.isEmpty ? locale.languageCode : locale.toString();
+        locale.countryCode.isEmpty ? locale.languageCode : locale.toString();
     final String localeName = Intl.canonicalizedLocale(name);
 
     return initializeMessages(localeName).then((_) {
@@ -20,13 +20,22 @@ class AppLocalizations {
   }
 
   password() => Intl.message("password");
+
+  email() => Intl.message("email");
+
+  register()=> Intl.message("register");
+
+  login() => Intl.message("login");
+
+  forgottenPassword() => Intl.message("forgotten_password");
 }
 
 class AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
   const AppLocalizationsDelegate();
 
   @override
-  bool isSupported(Locale locale) => ['en', 'fr','messages'].contains(locale.languageCode);
+  bool isSupported(Locale locale) =>
+      ['fr', 'messages'].contains(locale.languageCode);
 
   @override
   Future<AppLocalizations> load(Locale locale) => AppLocalizations.load(locale);

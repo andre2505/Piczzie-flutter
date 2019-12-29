@@ -32,8 +32,8 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       try {
         final user = await _userService.fetchUser(event.user);
         UserSession.setTokenPreference("bearer "+ user.token);
-        UserSession.setRefreshTokenPreference("bearer "+user.refreshToken);
-        yield LoadedLoginState(user);
+        UserSession.setRefreshTokenPreference("bearer "+ user.refreshToken);
+        yield SuccessLoginState(user);
       } catch (e) {
         yield ErrorLoginState(e);
       }

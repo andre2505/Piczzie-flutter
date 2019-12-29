@@ -16,14 +16,12 @@ class LoginView extends StatefulWidget {
   _loginViewState createState() => _loginViewState();
 }
 
-
 class _loginViewState extends State<LoginView> {
-
-
   @override
   void initState() {
     super.initState();
   }
+
   final loginBloc = LoginBloc();
   User user = User();
 
@@ -51,15 +49,16 @@ class _loginViewState extends State<LoginView> {
                         children: <Widget>[
                           TextField(
                             decoration: InputDecoration(
-                                hintText: AppLocalizations.of(context).password(),
+                                hintText: AppLocalizations.of(context).email(),
                                 prefixIcon: Icon(Icons.mail_outline),
                                 hintStyle: TextStyle(
                                     fontSize: 20, color: Colors.grey)),
                           ),
                           TextField(
                             decoration: InputDecoration(
-                                hintText: "sdf",
-                                prefixIcon: Icon(Icons.mail_outline),
+                                hintText:
+                                    AppLocalizations.of(context).password(),
+                                prefixIcon: Icon(Icons.lock_outline),
                                 hintStyle: TextStyle(
                                     fontSize: 20, color: Colors.grey)),
                           )
@@ -70,7 +69,7 @@ class _loginViewState extends State<LoginView> {
                           width: 300,
                           height: 50,
                           child: RaisedButton(
-                            child: Text("Connexion",
+                            child: Text(AppLocalizations.of(context).login(),
                                 style: TextStyle(fontSize: 20)),
                             color: CustomColors.greenCustom,
                             textColor: Colors.white,
@@ -90,7 +89,7 @@ class _loginViewState extends State<LoginView> {
                       Row(
                         children: <Widget>[
                           FlatButton(
-                            child: Text("df",
+                            child: Text(AppLocalizations.of(context).forgottenPassword(),
                                 style: TextStyle(color: Colors.black)),
                             splashColor: Colors.transparent,
                             highlightColor: Colors.transparent,
@@ -98,7 +97,7 @@ class _loginViewState extends State<LoginView> {
                           ),
                           Spacer(),
                           FlatButton(
-                            child: Text("Inscription",
+                            child: Text(AppLocalizations.of(context).register(),
                                 style: TextStyle(color: Colors.black)),
                             splashColor: Colors.transparent,
                             highlightColor: Colors.transparent,
@@ -111,7 +110,7 @@ class _loginViewState extends State<LoginView> {
                 );
               } else if (state is LoadingLoginState) {
                 return null;
-              } else if (state is LoadedLoginState) {
+              } else if (state is SuccessLoginState) {
                 return null;
               } else {
                 return null;

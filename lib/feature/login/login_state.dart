@@ -21,10 +21,10 @@ class LoadingLoginState extends LoginState {
   List<Object> get props => ['TodosLoading'];
 }
 
-class LoadedLoginState extends LoginState {
+class SuccessLoginState extends LoginState {
   final User user;
 
-  const LoadedLoginState(this.user);
+  const SuccessLoginState(this.user);
 
   @override
   List<Object> get props => [user];
