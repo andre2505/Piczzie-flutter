@@ -41,7 +41,7 @@ class _loginViewState extends State<LoginView> {
         ),
       ),
       Scaffold(
-
+          resizeToAvoidBottomPadding: false,
           backgroundColor: Colors.transparent,
           appBar: AppBar(
             title: const Text(''),
