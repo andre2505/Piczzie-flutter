@@ -12,7 +12,6 @@ import 'package:piczzie/service/service_locator.dart';
 import 'package:piczzie/service/base_network/navigation_service.dart';
 
 void main() {
-  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark);
   setupLocator();
   runApp(
     BlocProvider(

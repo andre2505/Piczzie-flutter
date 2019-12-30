@@ -5,7 +5,6 @@ import 'package:piczzie/feature/login/login_event.dart';
 import 'package:piczzie/feature/login/login_state.dart';
 import 'package:piczzie/localization/localization.dart';
 import 'package:piczzie/model/user.dart';
-import 'package:piczzie/ressources/color.dart';
 
 class LoginView extends StatefulWidget {
   LoginView({Key key, this.title}) : super(key: key);
@@ -27,94 +26,143 @@ class _loginViewState extends State<LoginView> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          title: const Text(''),
-          elevation: 0.0,
-          backgroundColor: Colors.transparent,
+    return Stack(children: [
+      Container(
+        color: Colors.deepPurple,
+        child: SafeArea(
+          bottom: false,
+          child: Container(
+              height: double.infinity,
+              decoration: BoxDecoration(
+                  image: DecorationImage(
+                image: AssetImage("assets/6443.jpg"),
+                fit: BoxFit.cover,
+              ))),
         ),
-        body: BlocProvider(
-            builder: (context) => LoginBloc(),
-            child:
-                BlocBuilder<LoginBloc, LoginState>(builder: (context, state) {
-              if (state is InitialLoginState) {
-                return Container(
-                  margin: EdgeInsets.only(top: 50),
-                  padding: EdgeInsets.all(20),
-                  child: Column(
-                    children: <Widget>[
-                      Wrap(
-                        runSpacing: 20,
-                        spacing: 20,
-                        children: <Widget>[
-                          TextField(
-                            decoration: InputDecoration(
-                                hintText: AppLocalizations.of(context).email(),
-                                prefixIcon: Icon(Icons.mail_outline),
-                                hintStyle: TextStyle(
-                                    fontSize: 20, color: Colors.grey)),
-                          ),
-                          TextField(
-                            decoration: InputDecoration(
-                                hintText:
-                                    AppLocalizations.of(context).password(),
-                                prefixIcon: Icon(Icons.lock_outline),
-                                hintStyle: TextStyle(
-                                    fontSize: 20, color: Colors.grey)),
-                          )
-                        ],
-                      ),
-                      Container(
-                          margin: EdgeInsets.only(top: 30),
-                          width: 300,
-                          height: 50,
-                          child: RaisedButton(
-                            child: Text(AppLocalizations.of(context).login(),
-                                style: TextStyle(fontSize: 20)),
-                            color: CustomColors.greenCustom,
-                            textColor: Colors.white,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: new BorderRadius.circular(40.0),
-                            ),
-                            highlightColor: Colors.blue,
-                            highlightElevation: 0,
-                            elevation: 0,
-                            onPressed: () {
-                              user = User(
-                                  email: "toto@gmail.com", password: "toto");
-                              BlocProvider.of<LoginBloc>(context)
-                                  .add(GetUser(user));
-                            },
-                          )),
-                      Row(
-                        children: <Widget>[
-                          FlatButton(
-                            child: Text(AppLocalizations.of(context).forgottenPassword(),
-                                style: TextStyle(color: Colors.black)),
-                            splashColor: Colors.transparent,
-                            highlightColor: Colors.transparent,
-                            onPressed: () {},
-                          ),
-                          Spacer(),
-                          FlatButton(
-                            child: Text(AppLocalizations.of(context).register(),
-                                style: TextStyle(color: Colors.black)),
-                            splashColor: Colors.transparent,
-                            highlightColor: Colors.transparent,
-                            onPressed: () {},
-                          )
-                        ],
-                      )
-                    ],
-                  ),
-                );
-              } else if (state is LoadingLoginState) {
-                return null;
-              } else if (state is SuccessLoginState) {
-                return null;
-              } else {
-                return null;
-              }
-            })));
+      ),
+      Scaffold(
+
+          backgroundColor: Colors.transparent,
+          appBar: AppBar(
+            title: const Text(''),
+            elevation: 0.0,
+            brightness: Brightness.dark,
+            backgroundColor: Colors.transparent,
+          ),
+          body: BlocProvider(
+              builder: (context) => LoginBloc(),
+              child:
+                  BlocBuilder<LoginBloc, LoginState>(builder: (context, state) {
+                if (state is InitialLoginState) {
+                  return Container(
+                      padding: EdgeInsets.all(20),
+                      child: Card(
+                          elevation: 10,
+                          child: Padding(
+                              padding: EdgeInsets.all(20),
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: <Widget>[
+                                  Wrap(
+                                    runSpacing: 20,
+                                    children: <Widget>[
+                                      TextField(
+                                        obscureText: false,
+                                        decoration: InputDecoration(
+                                            prefixIcon:
+                                                Icon(Icons.account_circle),
+                                            contentPadding: EdgeInsets.fromLTRB(
+                                                20.0, 15.0, 20.0, 15.0),
+                                            hintText:
+                                                AppLocalizations.of(context)
+                                                    .email(),
+                                            border: OutlineInputBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(
+                                                        32.0))),
+                                      ),
+                                      TextField(
+                                        decoration: InputDecoration(
+                                            prefixIcon: Icon(Icons.lock),
+                                            contentPadding: EdgeInsets.fromLTRB(
+                                                20.0, 15.0, 20.0, 15.0),
+                                            hintText:
+                                                AppLocalizations.of(context)
+                                                    .email(),
+                                            border: OutlineInputBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(
+                                                        32.0))),
+                                      )
+                                    ],
+                                  ),
+                                  Container(
+                                    margin: EdgeInsets.only(top: 30),
+                                    child: Column(
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: [
+                                          SizedBox(
+                                              height: 50,
+                                              width: 200,
+                                              child: RaisedButton(
+                                                child: Text(
+                                                    AppLocalizations.of(context)
+                                                        .login(),
+                                                    style: TextStyle(
+                                                        fontSize: 20)),
+                                                color: Colors.pinkAccent,
+                                                textColor: Colors.white,
+                                                shape: RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      new BorderRadius.circular(
+                                                          40.0),
+                                                ),
+                                                highlightColor: Colors.blue,
+                                                highlightElevation: 0,
+                                                elevation: 0,
+                                                onPressed: () {
+                                                  user = User(
+                                                      email: "toto@gmail.com",
+                                                      password: "toto");
+                                                  BlocProvider.of<LoginBloc>(
+                                                          context)
+                                                      .add(GetUser(user));
+                                                },
+                                              )),
+                                          SizedBox(
+                                              child: FlatButton(
+                                            child: Text(
+                                                AppLocalizations.of(context)
+                                                    .register(),
+                                                style: TextStyle(
+                                                    color: Colors.blueGrey,
+                                                    fontSize: 20)),
+                                            splashColor: Colors.transparent,
+                                            highlightColor: Colors.blueGrey[100],
+                                            onPressed: () {},
+                                          )),
+                                          FlatButton(
+                                            child: Text(
+                                                AppLocalizations.of(context)
+                                                    .forgottenPassword(),
+                                                style: TextStyle(
+                                                    color: Colors.black)),
+                                            splashColor: Colors.transparent,
+                                            highlightColor: Colors.grey,
+                                            onPressed: () {},
+                                          )
+                                        ]),
+                                  ),
+                                ],
+                              ))));
+                } else if (state is LoadingLoginState) {
+                  return null;
+                } else if (state is SuccessLoginState) {
+                  return null;
+                } else {
+                  return null;
+                }
+              })))
+    ]);
   }
 }
