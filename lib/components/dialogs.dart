@@ -1,29 +1,22 @@
 import 'package:flutter/material.dart';
 
 class Dialogs {
-  static showProgressDialog(BuildContext context, String title) {
+  static showProgressDialog(BuildContext context, String s) {
     try {
-      showDialog(
-          context: context,
-          barrierDismissible: false,
-          builder: (context) {
-            return AlertDialog(
-              content: Flex(
-                direction: Axis.horizontal,
-                children: <Widget>[
-                  CircularProgressIndicator(),
-                  Padding(padding: EdgeInsets.only(left: 15),),
-                  Flexible(
-                      flex: 8,
-                      child: Text(
-                        title,
-                        style: TextStyle(
-                            fontSize: 16, fontWeight: FontWeight.bold),
-                      )),
-                ],
-              ),
-            );
-          });
+      return Container(
+          child: Dialog(
+              child: Container(
+                  height: 100,
+                  width: 100,
+                  padding: EdgeInsets.all(20),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Row(children: [CircularProgressIndicator(),
+                       SizedBox(width: 20),
+                       Text(s)])
+                    ],
+                  ))));
     } catch (e) {
       print(e.toString());
     }

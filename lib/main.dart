@@ -43,8 +43,9 @@ class App extends StatelessWidget {
         const Locale('messages', '')
       ],
       navigatorKey: locator<NavigationService>().navigatorKey,
-      home: LoginView(title: 'Flutter Demo Home Page'),
+      home: HomeView(),
       routes: <String, WidgetBuilder>{
+        "/login": (BuildContext context) => LoginView(),
         "/homeView": (BuildContext context) => HomeView(),
       },
     );

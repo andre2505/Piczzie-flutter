@@ -9,7 +9,7 @@ class UserService {
 
   Future<User> fetchUser(User user) async {
     final response =
-        await _helper.get('/login');
+        await _helper.post('/login', user.toJson());
     return User.fromJson(response);
   }
 }
