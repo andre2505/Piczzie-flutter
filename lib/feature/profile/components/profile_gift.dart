@@ -1,5 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:piczzie/feature/profile/profile_state.dart';
+import 'package:piczzie/model/gift.dart';
+
+import '../profile_bloc.dart';
+import '../profile_event.dart';
 
 class ProfileGift extends StatefulWidget {
   ProfileGift({Key key}) : super(key: key);
@@ -9,46 +15,54 @@ class ProfileGift extends StatefulWidget {
 }
 
 class _profileGiftState extends State<ProfileGift> {
+  List<Gift> gifts = List<Gift>();
+  ScrollController _scrollController = ScrollController();
+
+  @override
+  void initState() {
+    super.initState();
+    _scrollController.addListener(() {
+      if (_scrollController.position.pixels ==
+          _scrollController.position.maxScrollExtent) {
+        BlocProvider.of<ProfileBloc>(context).add(GetGiftList());
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return GridView.count(
-      primary: false,
-      padding: const EdgeInsets.all(10),
-      crossAxisSpacing: 5,
-      mainAxisSpacing: 5,
-      crossAxisCount: 3,
-      children: <Widget>[
-        Container(
-          padding: const EdgeInsets.all(8),
-          child: const Text('He\'d have you all unravel at the'),
-          color: Colors.teal[100],
+    BlocProvider.of<ProfileBloc>(context).add(GetGiftList());
+
+    if (BlocProvider.of<ProfileBloc>(context).state is SuccessProfileState) {
+      print("sfdqsefsdf");
+      gifts.addAll(
+          (BlocProvider.of<ProfileBloc>(context).state as SuccessProfileState)
+              .gifts);
+    }
+    return GridView.builder(
+        itemCount: gifts.length,
+        controller: _scrollController,
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 3,
+          mainAxisSpacing: 2.0,
+          crossAxisSpacing: 2.0,
         ),
-        Container(
-          padding: const EdgeInsets.all(8),
-          child: const Text('Heed not the rabble'),
-          color: Colors.teal[200],
-        ),
-        Container(
-          padding: const EdgeInsets.all(8),
-          child: const Text('Sound of screams but the'),
-          color: Colors.teal[300],
-        ),
-        Container(
-          padding: const EdgeInsets.all(8),
-          child: const Text('Who scream'),
-          color: Colors.teal[400],
-        ),
-        Container(
-          padding: const EdgeInsets.all(8),
-          child: const Text('Revolution is coming...'),
-          color: Colors.teal[500],
-        ),
-        Container(
-          padding: const EdgeInsets.all(8),
-          child: const Text('Revolution, they...'),
-          color: Colors.teal[600],
-        ),
-      ],
-    );
+        itemBuilder: (BuildContext context, int index) {
+          print("http://localhost:8080/" + gifts[index].image);
+          return Container(
+            decoration: BoxDecoration(
+                color: Colors.brown,
+                image: DecorationImage(
+                    fit: BoxFit.cover,
+                    image: NetworkImage(
+                        "http://localhost:8080/" + gifts[index].image))),
+          );
+        });
   }
 }

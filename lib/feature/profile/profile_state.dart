@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
+import 'package:piczzie/model/gift.dart';
 import 'package:piczzie/model/user.dart';
 
 @immutable
@@ -22,12 +23,12 @@ class LoadingProfileState extends ProfileState {
 }
 
 class SuccessProfileState extends ProfileState {
-  final List<User> users;
+  final List<Gift> gifts;
 
-  const SuccessProfileState(this.users);
+  const SuccessProfileState(this.gifts);
 
   @override
-  List<Object> get props => [users];
+  List<Object> get props => [gifts];
 }
 
 class ErrorProfileState extends ProfileState {

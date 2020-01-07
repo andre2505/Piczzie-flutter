@@ -27,7 +27,6 @@ class ApiBaseHelper {
   Future<dynamic> get(String url) async {
     var responseJson;
     try {
-      print(_header);
       final response = await http.get(_baseUrl + url, headers: _header);
       responseJson = _returnResponse(response);
     } on SocketException {
@@ -119,7 +118,6 @@ class ApiBaseHelper {
   getToken() async {
     await UserSession.getTokenPreference().then((value) {
       this._header = {"Authorization" :"bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1YzYxNmVlNzlhNjM0NTE4NTJhNDkyYjYiLCJ1c2VyIjp7Il9pZCI6IjVjNjE2ZWU3OWE2MzQ1MTg1MmE0OTJiNiIsImZpcnN0bmFtZSI6ImRkIiwibGFzdG5hbWUiOiJ0b3RvIiwiZ2VuZGVyIjoxLCJlbWFpbCI6InRvdG9AZ21haWwuY29tIiwicGFzc3dvcmQiOiIkMmEkMTAkcjBTZFU1WkMxVUJOQzZYZXdTV1h2LmttdnlEODRsSlZhbnFUMXlCamVxZmRGeldWZUZ1UXkiLCJiaXJ0aGRheSI6IjIwMTktMDEtMjFUMTI6NTg6MzYuMDAwWiIsImZyaWVuZHMiOlt7Il9pZCI6IjVkZWU0Y2U5MzhkNDQ4MTQ2ZDY4NTA4OSIsImZyaWVuZHNfaWQiOiI1Y2I5NzhkZDRhNzY4NTBmMjZiMDhmZTUiLCJzdGF0ZSI6MX1dLCJwaG90byI6IklNR18yMDE5MTIxN18wMDEzMTMuanBnIiwiX192IjowfSwiaWF0IjoxNTc4NDAxNTgwLCJleHAiOjE1Nzg0ODc5ODB9.oNd3cZ3pR54tjJXGbvXQviDFzt43oRBabAxLPeckx4Q"};//{"Authorization": "$value"};
-      print(_header);
     }).catchError((error) {
       return "";
     });

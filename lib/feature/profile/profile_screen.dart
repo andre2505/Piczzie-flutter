@@ -68,9 +68,6 @@ class _profileScreenState extends State<ProfileScreen>
         body: BlocProvider(
           builder: (context) => ProfileBloc(),
           child: BlocBuilder<ProfileBloc, ProfileState>(builder: (context, state) {
-            if(state is InitialProfileState){
-              BlocProvider.of<ProfileBloc>(context).add(GetGiftList());
-            }
             return Container(
                 child: Column(children: [
               ProfileInformations(),
