@@ -5,7 +5,11 @@ import 'package:http/http.dart';
 import 'package:piczzie/feature/login/login_bloc.dart';
 import 'package:piczzie/feature/login/login_state.dart';
 import 'package:piczzie/feature/login/login_view.dart';
+import 'package:piczzie/feature/profile/components/profile_gift.dart';
 import 'package:piczzie/feature/profile/components/profile_informations.dart';
+import 'package:piczzie/feature/profile/profile_bloc.dart';
+import 'package:piczzie/feature/profile/profile_event.dart';
+import 'package:piczzie/feature/profile/profile_state.dart';
 import 'package:piczzie/ressources/color.dart';
 import 'package:piczzie/ressources/icons/picons.dart';
 
@@ -62,8 +66,11 @@ class _profileScreenState extends State<ProfileScreen>
           ],
         ),
         body: BlocProvider(
-          builder: (context) => LoginBloc(),
-          child: BlocBuilder<LoginBloc, LoginState>(builder: (context, state) {
+          builder: (context) => ProfileBloc(),
+          child: BlocBuilder<ProfileBloc, ProfileState>(builder: (context, state) {
+            if(state is InitialProfileState){
+              BlocProvider.of<ProfileBloc>(context).add(GetGiftList());
+            }
             return Container(
                 child: Column(children: [
               ProfileInformations(),
@@ -97,36 +104,7 @@ class _profileScreenState extends State<ProfileScreen>
               Expanded(
                   child: TabBarView(
                 controller: _tabController,
-                children: <Widget>[
-                  ListView(children: [
-                    Text("slksdfmjkljlkmsf"),
-                    Text("slksdfmjkljlkmsf"),
-                    Text("slksdfmjkljlkmsf"),
-                    Text("slksdfmjkljlkmsf"),
-                    Text("slksdfmjkljlkmsf"),
-                    Text("slksdfmjkljlkmsf"),
-                    Text("slksdfmjkljlkmsf"),
-                    Text("slksdfmjkljlkmsf"),
-                    Text("slksdfmjkljlkmsf"),
-                    Text("slksdfmjkljlkmsf"),
-                    Text("slksdfmjkljlkmsf"),
-                    Text("slksdfmjkljlkmsf"),
-                    Text("slksdfmjkljlkmsf"),
-                    Text("slksdfmjkljlkmsf"),
-                    Text("slksdfmjkljlkmsf"),
-                    Text("slksdfmjkljlkmsf"),
-                    Text("slksdfmjkljlkmsf"),
-                    Text("slksdfmjkljlkmsf"),
-                    Text("slksdfmjkljlkmsf"),
-                    Text("slksdfmjkljlkmsf"),
-                    Text("slksdfmjkljlkmsf"),
-                    Text("slksdfmjkljlkmsf"),
-                    Text("slksdfmjkljlkmsf"),
-                    Text("slksdfmjkljlkmsf"),
-                    Text("slksdfmjkljlkmsf")
-                  ]),
-                  Text("slkmjkljlkmsf")
-                ],
+                children: <Widget>[ProfileGift(), Text("slkmjkljlkmsf")],
               ))
             ]));
           }),
