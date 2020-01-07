@@ -5,18 +5,17 @@ import 'package:piczzie/model/user.dart';
 import 'package:piczzie/service/base_network/api_base_helper.dart';
 
 class UserService {
-
   ApiBaseHelper _helper = locator<ApiBaseHelper>();
 
   Future<User> fetchUser(User user) async {
-    final response =
-        await _helper.post('/login', user.toJson());
+    final response = await _helper.post('/login', user.toJson());
     return User.fromJson(response);
   }
 
-  Future<List<Gift>> getListGift(String id) async {
-    final response = await _helper.get('/api/gift/user/'+id);
+  Future<List<Gift>> getListGift(String id, int offset) async {
+    final response = await _helper
+        .get('/api/gift/user/' + id + "?offset=" + offset.toString());
     var giftList = response as List;
-        return giftList.map((i) => Gift.fromJson(i)).toList();
+    return giftList.map((i) => Gift.fromJson(i)).toList();
   }
 }

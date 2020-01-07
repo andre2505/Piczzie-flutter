@@ -16,7 +16,11 @@ class GetGift extends ProfileEvent {
 }
 
 class GetGiftList extends ProfileEvent {
+  final String id;
+  final int offset;
+
+  const GetGiftList(this.id, this.offset);
   @override
-  List<Object> get props => null;
+  List<Object> get props => [id, offset];
 
 }

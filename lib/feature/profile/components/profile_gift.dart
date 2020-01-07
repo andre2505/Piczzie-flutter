@@ -24,7 +24,7 @@ class _profileGiftState extends State<ProfileGift> {
     _scrollController.addListener(() {
       if (_scrollController.position.pixels ==
           _scrollController.position.maxScrollExtent) {
-        BlocProvider.of<ProfileBloc>(context).add(GetGiftList());
+        BlocProvider.of<ProfileBloc>(context).add(GetGiftList("5c616ee79a63451852a492b6", gifts.length));
       }
     });
   }
@@ -37,10 +37,8 @@ class _profileGiftState extends State<ProfileGift> {
 
   @override
   Widget build(BuildContext context) {
-    BlocProvider.of<ProfileBloc>(context).add(GetGiftList());
-
+    BlocProvider.of<ProfileBloc>(context).add(GetGiftList("5c616ee79a63451852a492b6", gifts.length));
     if (BlocProvider.of<ProfileBloc>(context).state is SuccessProfileState) {
-      print("sfdqsefsdf");
       gifts.addAll(
           (BlocProvider.of<ProfileBloc>(context).state as SuccessProfileState)
               .gifts);
@@ -57,7 +55,7 @@ class _profileGiftState extends State<ProfileGift> {
           print("http://localhost:8080/" + gifts[index].image);
           return Container(
             decoration: BoxDecoration(
-                color: Colors.brown,
+                color: Colors.grey,
                 image: DecorationImage(
                     fit: BoxFit.cover,
                     image: NetworkImage(

@@ -16,7 +16,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     if (event is GetGiftList) {
       try {
         final gifts =
-            await _userService.getListGift("5c616ee79a63451852a492b6");
+            await _userService.getListGift(event.id, event.offset);
         yield SuccessProfileState(gifts);
       } catch (e) {
         print("non");
