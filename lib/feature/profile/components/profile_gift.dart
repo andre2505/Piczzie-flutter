@@ -46,7 +46,8 @@ class _profileGiftState extends State<ProfileGift> {
           (BlocProvider.of<ProfileBloc>(context).state as SuccessProfileState)
               .gifts);
     }
-    return CustomScrollView(
+    return Scrollbar(
+        child: CustomScrollView(
       slivers: <Widget>[
         SliverPadding(
             padding: EdgeInsets.all(0.0),
@@ -56,25 +57,26 @@ class _profileGiftState extends State<ProfileGift> {
                   children: <Widget>[
                     //your widgets
                     GridView.builder(
-                        shrinkWrap: true,
-                        itemCount: gifts.length,
-                        controller: _scrollController,
-                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 3,
-                          mainAxisSpacing: 2.0,
-                          crossAxisSpacing: 2.0,
-                        ),
-                        itemBuilder: (BuildContext context, int index) {
-                          return Container(
-                            decoration: BoxDecoration(
-                                color: Colors.grey,
-                                image: DecorationImage(
-                                    fit: BoxFit.cover,
-                                    image: NetworkImage(
-                                        "http://localhost:8080/" +
-                                            gifts[index].image))),
-                          );
-                        }),
+                            shrinkWrap: true,
+                            itemCount: gifts.length,
+                            controller: _scrollController,
+                            gridDelegate:
+                                SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 3,
+                              mainAxisSpacing: 2.0,
+                              crossAxisSpacing: 2.0,
+                            ),
+                            itemBuilder: (BuildContext context, int index) {
+                              return Container(
+                                decoration: BoxDecoration(
+                                    color: Colors.grey,
+                                    image: DecorationImage(
+                                        fit: BoxFit.cover,
+                                        image: NetworkImage(
+                                            "http://localhost:8080/" +
+                                                gifts[index].image))),
+                              );
+                            }),
 
                     (BlocProvider.of<ProfileBloc>(context).state
                             is LoadingProfileState)
@@ -89,7 +91,7 @@ class _profileGiftState extends State<ProfileGift> {
               ]),
             ))
       ],
-    );
+    ));
 
     /*Scrollbar(child :GridView.builder(
         itemCount: gifts.length,
