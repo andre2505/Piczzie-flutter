@@ -14,9 +14,12 @@ class ProfileGift extends StatefulWidget {
   _profileGiftState createState() => _profileGiftState();
 }
 
-class _profileGiftState extends State<ProfileGift> {
+class _profileGiftState extends State<ProfileGift> with AutomaticKeepAliveClientMixin {
   List<Gift> gifts = List<Gift>();
   ScrollController _scrollController = ScrollController();
+
+  @override
+  bool get wantKeepAlive => true;
 
   @override
   void initState() {
