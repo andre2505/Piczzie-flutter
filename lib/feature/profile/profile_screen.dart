@@ -1,14 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:http/http.dart';
-import 'package:piczzie/feature/login/login_bloc.dart';
-import 'package:piczzie/feature/login/login_state.dart';
 import 'package:piczzie/feature/login/login_view.dart';
-import 'package:piczzie/feature/profile/components/profile_gift.dart';
+import 'package:piczzie/feature/profile/components/profile_gift/profile_gift_bloc.dart';
+import 'package:piczzie/feature/profile/components/profile_gift/profile_gift_event.dart';
+import 'package:piczzie/feature/profile/components/profile_gift/profile_gift_screen.dart';
+import 'package:piczzie/feature/profile/components/profile_gift/profile_gift_state.dart';
 import 'package:piczzie/feature/profile/components/profile_informations.dart';
 import 'package:piczzie/feature/profile/profile_bloc.dart';
-import 'package:piczzie/feature/profile/profile_event.dart';
 import 'package:piczzie/feature/profile/profile_state.dart';
 import 'package:piczzie/ressources/color.dart';
 import 'package:piczzie/ressources/icons/picons.dart';
@@ -50,24 +49,25 @@ class _profileScreenState extends State<ProfileScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        resizeToAvoidBottomPadding: true,
-        appBar: AppBar(
-          backgroundColor: CustomColors.greenCustom,
-          brightness: Brightness.dark,
-          actions: <Widget>[
-            IconButton(
-              icon: Icon(Icons.settings),
-              color: Colors.white,
-              onPressed: () {
-                Navigator.of(context)
-                    .push(MaterialPageRoute(builder: (context) => LoginView()));
-              },
-            )
-          ],
-        ),
-        body: BlocProvider(
+      resizeToAvoidBottomPadding: true,
+      appBar: AppBar(
+        backgroundColor: CustomColors.greenCustom,
+        brightness: Brightness.dark,
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.settings),
+            color: Colors.white,
+            onPressed: () {
+              Navigator.of(context)
+                  .push(MaterialPageRoute(builder: (context) => LoginView()));
+            },
+          )
+        ],
+      ),
+      body: BlocProvider(
           builder: (context) => ProfileBloc(),
-          child: BlocBuilder<ProfileBloc, ProfileState>(builder: (context, state) {
+          child:
+              BlocBuilder<ProfileBloc, ProfileState>(builder: (context, state) {
             return Container(
                 child: Column(children: [
               ProfileInformations(),
@@ -104,7 +104,7 @@ class _profileScreenState extends State<ProfileScreen>
                 children: <Widget>[ProfileGift(), Text("slkmjkljlkmsf")],
               ))
             ]));
-          }),
-        ));
+          })),
+    );
   }
 }

@@ -13,10 +13,10 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
 
   @override
   Stream<ProfileState> mapEventToState(ProfileEvent event) async* {
-    yield LoadingProfileState();
     if (event is GetGiftList) {
       try {
-        final gifts = await _userService.getListGift(event.id, event.offset);
+        final gifts =
+            await _userService.getListGift(event.id, event.offset);
         yield SuccessProfileState(gifts);
       } catch (e) {
         print("non");
