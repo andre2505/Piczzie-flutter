@@ -95,24 +95,5 @@ class _profileGiftState extends State<ProfileGift> with AutomaticKeepAliveClient
             ))
       ],
     ));
-
-    /*Scrollbar(child :GridView.builder(
-        itemCount: gifts.length,
-        controller: _scrollController,
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 3,
-          mainAxisSpacing: 2.0,
-          crossAxisSpacing: 2.0,
-        ),
-        itemBuilder: (BuildContext context, int index) {
-          return Container(
-            decoration: BoxDecoration(
-                color: Colors.grey,
-                image: DecorationImage(
-                    fit: BoxFit.cover,
-                    image: NetworkImage(
-                        "http://localhost:8080/" + gifts[index].image))),
-          );
-        }));*/
   }
 }

@@ -51,7 +51,13 @@ class _homeViewState extends State<HomeView> {
           Navigator(
             key: _profileScreen,
             onGenerateRoute: (route) => MaterialPageRoute(
-                settings: route, builder: (context) => ProfileScreen()),
+                settings: route,
+                builder: (context) {
+                  if (_selectedIndex == 4) {
+                    return ProfileScreen();
+                  }
+                  return SizedBox.shrink();
+                }),
           )
         ],
       ),
