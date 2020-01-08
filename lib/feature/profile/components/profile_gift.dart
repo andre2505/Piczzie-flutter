@@ -14,9 +14,11 @@ class ProfileGift extends StatefulWidget {
   _profileGiftState createState() => _profileGiftState();
 }
 
-class _profileGiftState extends State<ProfileGift> with AutomaticKeepAliveClientMixin {
+class _profileGiftState extends State<ProfileGift>
+    with AutomaticKeepAliveClientMixin {
   List<Gift> gifts = List<Gift>();
   ScrollController _scrollController = ScrollController();
+  bool stopLoadMore = false;
 
   @override
   bool get wantKeepAlive => true;
@@ -45,9 +47,13 @@ class _profileGiftState extends State<ProfileGift> with AutomaticKeepAliveClient
     BlocProvider.of<ProfileBloc>(context)
         .add(GetGiftList("5c616ee79a63451852a492b6", gifts.length));
     if (BlocProvider.of<ProfileBloc>(context).state is SuccessProfileState) {
-      gifts.addAll(
-          (BlocProvider.of<ProfileBloc>(context).state as SuccessProfileState)
-              .gifts);
+      SuccessProfileState successProfileState =
+          BlocProvider.of<ProfileBloc>(context).state as SuccessProfileState;
+      if (successProfileState.gifts.length > 0) {
+        gifts.addAll(successProfileState.gifts);
+      } else {
+        stopLoadMore = true;
+      }
     }
     return Scrollbar(
         child: CustomScrollView(
@@ -60,35 +66,34 @@ class _profileGiftState extends State<ProfileGift> with AutomaticKeepAliveClient
                   children: <Widget>[
                     //your widgets
                     GridView.builder(
-                            shrinkWrap: true,
-                            itemCount: gifts.length,
-                            controller: _scrollController,
-                            gridDelegate:
-                                SliverGridDelegateWithFixedCrossAxisCount(
-                              crossAxisCount: 3,
-                              mainAxisSpacing: 2.0,
-                              crossAxisSpacing: 2.0,
-                            ),
-                            itemBuilder: (BuildContext context, int index) {
-                              return Container(
-                                decoration: BoxDecoration(
-                                    color: Colors.grey,
-                                    image: DecorationImage(
-                                        fit: BoxFit.cover,
-                                        image: NetworkImage(
-                                            "http://localhost:8080/" +
-                                                gifts[index].image))),
-                              );
-                            }),
+                        shrinkWrap: true,
+                        itemCount: gifts.length,
+                        controller: _scrollController,
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 3,
+                          mainAxisSpacing: 2.0,
+                          crossAxisSpacing: 2.0,
+                        ),
+                        itemBuilder: (BuildContext context, int index) {
+                          return Container(
+                            decoration: BoxDecoration(
+                                color: Colors.grey,
+                                image: DecorationImage(
+                                    fit: BoxFit.cover,
+                                    image: NetworkImage(
+                                        "http://localhost:8080/" +
+                                            gifts[index].image))),
+                          );
+                        }),
 
                     (BlocProvider.of<ProfileBloc>(context).state
-                            is LoadingProfileState)
+                            is LoadingProfileState && stopLoadMore == false)
                         ? Center(
                             child: Container(
                                 margin: EdgeInsets.only(top: 10),
                                 child: CircularProgressIndicator()),
                           )
-                        : Center()
+                        : SizedBox.shrink()
                   ],
                 )
               ]),
