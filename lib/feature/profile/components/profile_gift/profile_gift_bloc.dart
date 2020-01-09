@@ -2,11 +2,12 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:piczzie/feature/profile/components/profile_gift/profile_gift_state.dart';
 import 'package:piczzie/feature/profile/components/profile_gift/profile_gift_event.dart';
+import 'package:piczzie/service/repository/gift_repository.dart';
 import 'package:piczzie/service/service_locator.dart';
-import 'package:piczzie/service/user_service.dart';
+import 'package:piczzie/service/repository/user_service.dart';
 
 class ProfileGiftBloc extends Bloc<ProfileGiftEvent, ProfileGiftState> {
-  UserService _userService = locator<UserService>();
+  GiftRepository _giftRepository = locator<GiftRepository>();
 
   @override
   ProfileGiftState get initialState => InitialProfileGiftState();
@@ -20,11 +21,11 @@ class ProfileGiftBloc extends Bloc<ProfileGiftEvent, ProfileGiftState> {
 
   Stream<ProfileGiftState> _mapLoadProfileGiftState(GetGiftProfileList event) async* {
     yield LoadingProfileGiftState();
-
     try {
-      final gifts = await _userService.getListGift(event.id, event.offset);
+      final gifts = await _giftRepository.getListGift(event.id, event.offset);
       yield SuccessProfileGiftState(gifts);
     } catch (e) {
+      print(e);
       yield ErrorProfileGiftState(e);
     }
   }

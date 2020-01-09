@@ -4,7 +4,7 @@ import 'package:piczzie/feature/login/login_state.dart';
 import 'package:bloc/bloc.dart';
 import 'package:piczzie/service/service_locator.dart';
 import 'package:piczzie/model/user.dart';
-import 'package:piczzie/service/user_service.dart';
+import 'package:piczzie/service/repository/user_service.dart';
 import 'package:piczzie/service/user_session.dart';
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
@@ -31,9 +31,9 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     if (event is GetUser) {
       try {
         final user = await _userService.fetchUser(event.user);
-        print(user.token);
-        UserSession.setTokenPreference("bearer "+ user.token);
-        UserSession.setRefreshTokenPreference("bearer "+ user.refreshToken);
+        print(user.refreshToken);
+        UserSession.setTokenPreference(user.token);
+        UserSession.setRefreshTokenPreference(user.refreshToken);
         yield SuccessLoginState(user);
       } catch (e) {
         print(e);

@@ -1,40 +1,49 @@
-import 'dart:ffi';
-
 import 'package:built_value/built_value.dart';
-import 'package:equatable/equatable.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:json_annotation/json_annotation.dart';
 import 'package:piczzie/model/user.dart';
 
-@immutable
-class Gift extends Equatable {
+part 'gift.g.dart';
+
+@JsonSerializable()
+class Gift {
   @nullable
+  @JsonKey(name: '_id', includeIfNull: false)
   final String id;
 
   @nullable
+  @JsonKey(includeIfNull: false)
   final String description;
 
   @nullable
+  @JsonKey(includeIfNull: false)
   final double price;
 
   @nullable
+  @JsonKey(includeIfNull: false)
   final String place;
 
   @nullable
+  @JsonKey(includeIfNull: false)
   final String website;
 
   @nullable
+  @JsonKey(includeIfNull: false)
   final DateTime date;
 
   @nullable
+  @JsonKey(includeIfNull: false)
   final String image;
 
   @nullable
+  @JsonKey(includeIfNull: false)
   final User user;
 
   @nullable
+  @JsonKey(name: 'user_reserved', includeIfNull: false)
   final User userReserved;
 
   @nullable
+  @JsonKey(name: 'user_request', includeIfNull: false)
   final User userRequest;
 
   @override
@@ -50,35 +59,8 @@ class Gift extends Equatable {
       this.userReserved,
       this.userRequest});
 
-  factory Gift.fromJson(Map<String, dynamic> json) {
-    var _price = json['price'];
-    var _date = json['date'];
-    return Gift(
-        id: json['_id'],
-        description: json['description'],
-        price: _price != null ? _price.toDouble() : 0.0,
-        place: json['place'],
-        website: json['website'],
-        date: DateTime.parse(_date),
-        image: json["image"],
-        user: json["user"],
-        userReserved: json["user_reserved"],
-        userRequest: json["user_request"]);
-  }
 
-  //Map<String, dynamic> toJson() => {'email': email, 'password': password};
+  factory Gift.fromJson(Map<String, dynamic> json) => _$GiftFromJson(json);
 
-  @override
-  List<Object> get props => [
-        this.id,
-        this.description,
-        this.price,
-        this.place,
-        this.website,
-        this.date,
-        this.image,
-        this.user,
-        this.userReserved,
-        this.userRequest
-      ];
+  Map<String, dynamic> toJson() => _$GiftToJson(this);
 }

@@ -3,7 +3,7 @@ import 'package:bloc/bloc.dart';
 import 'package:piczzie/feature/profile/profile_event.dart';
 import 'package:piczzie/feature/profile/profile_state.dart';
 import 'package:piczzie/service/service_locator.dart';
-import 'package:piczzie/service/user_service.dart';
+import 'package:piczzie/service/repository/user_service.dart';
 
 class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   UserService _userService = locator<UserService>();
@@ -15,9 +15,9 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   Stream<ProfileState> mapEventToState(ProfileEvent event) async* {
     if (event is GetGiftList) {
       try {
-        final gifts =
+       /* final gifts =
             await _userService.getListGift(event.id, event.offset);
-        yield SuccessProfileState(gifts);
+        yield SuccessProfileState(gifts);*/
       } catch (e) {
         print("non");
         yield ErrorProfileState(e);
