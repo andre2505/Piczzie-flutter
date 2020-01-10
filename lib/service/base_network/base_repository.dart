@@ -1,9 +1,8 @@
-import 'dart:io';
-
 import 'package:dio/dio.dart';
-import 'package:piczzie/model/user.dart';
+import 'package:piczzie/service/service_locator.dart';
 import 'package:piczzie/service/user_session.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+
+import 'navigation_service.dart';
 
 class BaseRepository {
   Dio dio;
@@ -17,7 +16,7 @@ class BaseRepository {
   void initInstanceApi() async {
     token = await UserSession.getTokenPreference();
     refreshToken = await UserSession.getRefreshTokenPreference();
-    await _initApi();
+    _initApi();
   }
 
   _initApi() {
@@ -30,42 +29,48 @@ class BaseRepository {
     dio.interceptors
         .add(InterceptorsWrapper(onError: (DioError dioError) async {
       Response response;
-      print(dioError);
       RequestOptions responseRequest;
       if (dioError.response?.statusCode == 401 ||
           dioError.response?.statusCode == 403) {
         dio.interceptors.requestLock.lock();
         dio.interceptors.responseLock.lock();
+
         responseRequest = dioError.response.request;
-        print(responseRequest.method);
-        FormData formData = new FormData.fromMap({"token": refreshToken});
-        response = await dio.post("http://localhost:8080/api/user/token",
-            data: formData,
-            options: Options(
-                contentType: "application/x-www-form-urlencoded",
-                headers: {"Authorization": "bearer " + refreshToken}));
-        print(response);
+
+        Dio dioRefresh = Dio();
+        dioRefresh.options.headers['content-type'] =
+            "application/x-www-form-urlencoded";
+        response = await dioRefresh
+            .post("http://localhost:8080/token", data: {"token": refreshToken});
         dio.interceptors.requestLock.unlock();
         dio.interceptors.responseLock.unlock();
+
+        UserSession.setTokenPreference(response.data["token"]);
+        UserSession.setRefreshTokenPreference(response.data["refresh_token"]);
+
         if (response.statusCode == 200) {
-          User user = User.fromJson(response.data);
-          dio.interceptors.responseLock.lock();
-          dio.interceptors.requestLock.lock();
-          UserSession.setTokenPreference(user.token);
-          UserSession.setRefreshTokenPreference(user.refreshToken);
-          dio.interceptors.responseLock.unlock();
-          dio.interceptors.requestLock.unlock();
-          /*responseRequest.method
-          dio.request(responseRequest.path, options: )*/
+          Dio dioRetry = Dio();
+          dioRetry.options.headers["content-type"] =
+              "application/x-www-form-urlencoded";
+          dioRetry.lock();
+
+          token = await UserSession.getTokenPreference();
+          refreshToken = await UserSession.getTokenPreference();
+          dioRetry.options.headers['Authorization'] = "bearer $token";
+
+          dioRetry.unlock();
+
+          response = await dioRetry.request(
+              "http://localhost:8080" + responseRequest.path,
+              data: responseRequest.data,
+              options: Options(method: responseRequest.method));
+
           return response;
         } else {
-          print(response.data);
-          return null;
+          locator<NavigationService>().navigateTo('/login');
         }
-      } else {
-        print(response.data);
-        return null;
       }
+      return null;
     }));
   }
 

@@ -9,12 +9,8 @@ class UserService {
   BaseRepository _dio = locator<BaseRepository>();
 
   Future<User> fetchUser(User user) async {
-    FormData formData = new FormData.fromMap({
-      "email": user.email,
-      "password": user.password,
-    });
     final response =
-        await _dio.getInstance().post('/login', data: {"user": user.toJson()});
+        await _dio.getInstance().post('/login', data: user.toJson());
     return User.fromJson(response.data);
   }
 }

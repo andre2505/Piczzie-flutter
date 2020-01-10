@@ -25,12 +25,13 @@ class _profileGiftState extends State<ProfileGift>
   void initState() {
     super.initState();
     _scrollController.addListener(() {
-      if(stopLoadMore == false) {
+      print(stopLoadMore);
+      if (stopLoadMore == false) {
         var triggerFetchMoreSize =
             0.9 * _scrollController.position.maxScrollExtent;
         if (_scrollController.position.pixels > triggerFetchMoreSize) {
-          BlocProvider.of<ProfileGiftBloc>(context)
-              .add(
+          print(gifts.length);
+          BlocProvider.of<ProfileGiftBloc>(context).add(
               GetGiftProfileList("5c616ee79a63451852a492b6", gifts.length));
         }
       }
@@ -45,14 +46,10 @@ class _profileGiftState extends State<ProfileGift>
 
   @override
   Widget build(BuildContext context) {
-   return BlocProvider(
+    return BlocProvider(
         builder: (context) => ProfileGiftBloc(),
         child: BlocBuilder<ProfileGiftBloc, ProfileGiftState>(
             builder: (context, state) {
-
-          BlocProvider.of<ProfileGiftBloc>(context).add(
-              GetGiftProfileList("5c616ee79a63451852a492b6", gifts.length));
-
           if (BlocProvider.of<ProfileGiftBloc>(context).state
               is SuccessProfileGiftState) {
             SuccessProfileGiftState successProfileGiftState =
@@ -63,8 +60,11 @@ class _profileGiftState extends State<ProfileGift>
             } else {
               stopLoadMore = true;
             }
+          } else if (BlocProvider.of<ProfileGiftBloc>(context).state
+              is InitialProfileGiftState) {
+            BlocProvider.of<ProfileGiftBloc>(context).add(
+                GetGiftProfileList("5c616ee79a63451852a492b6", gifts.length));
           }
-
           return Scrollbar(
               child: CustomScrollView(
             slivers: <Widget>[

@@ -31,6 +31,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     if (event is GetUser) {
       try {
         final user = await _userService.fetchUser(event.user);
+        print(user.token);
         print(user.refreshToken);
         UserSession.setTokenPreference(user.token);
         UserSession.setRefreshTokenPreference(user.refreshToken);

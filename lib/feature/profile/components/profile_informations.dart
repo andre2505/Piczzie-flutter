@@ -1,8 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:piczzie/model/user.dart';
-import 'package:piczzie/ressources/color.dart';
-import 'package:piczzie/ressources/icons/picons.dart';
 
 class ProfileInformations extends StatefulWidget {
   ProfileInformations({Key key}) : super(key: key);
