@@ -24,3 +24,9 @@ class GetGiftProfileList extends ProfileGiftEvent {
   List<Object> get props => [id, offset];
 
 }
+
+class StopLoadMoreListEvent extends ProfileGiftEvent{
+  @override
+  List<Object> get props => null;
+
+}

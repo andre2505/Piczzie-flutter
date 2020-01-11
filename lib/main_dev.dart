@@ -11,7 +11,7 @@ void main() {
   var configureApp = AppConfig(
     appTitle: "Piczzie_dev",
     buildFlavor: "Development",
-    endpoint: "http://localhost:8080/",
+    endpoint: "http://192.168.1.51:8080/",
     child: App(),
   );
 

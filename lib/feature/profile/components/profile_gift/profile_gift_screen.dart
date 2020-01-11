@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:piczzie/configuration/app_config.dart';
 import 'package:piczzie/feature/profile/components/profile_gift/profile_gift_state.dart';
 import 'package:piczzie/feature/profile/components/profile_gift/profile_gift_bloc.dart';
 import 'package:piczzie/feature/profile/components/profile_gift/profile_gift_event.dart';
@@ -15,7 +16,8 @@ class ProfileGift extends StatefulWidget {
 class _profileGiftState extends State<ProfileGift>
     with AutomaticKeepAliveClientMixin {
   List<Gift> gifts = List<Gift>();
-  ScrollController _scrollController = ScrollController();
+  ScrollController _scrollController =
+      ScrollController(initialScrollOffset: 5.0, keepScrollOffset: false);
   bool stopLoadMore = false;
 
   @override
@@ -24,18 +26,6 @@ class _profileGiftState extends State<ProfileGift>
   @override
   void initState() {
     super.initState();
-    _scrollController.addListener(() {
-      print(stopLoadMore);
-      if (stopLoadMore == false) {
-        var triggerFetchMoreSize =
-            0.9 * _scrollController.position.maxScrollExtent;
-        if (_scrollController.position.pixels > triggerFetchMoreSize) {
-          print(gifts.length);
-          BlocProvider.of<ProfileGiftBloc>(context).add(
-              GetGiftProfileList("5c616ee79a63451852a492b6", gifts.length));
-        }
-      }
-    });
   }
 
   @override
@@ -50,6 +40,7 @@ class _profileGiftState extends State<ProfileGift>
         builder: (context) => ProfileGiftBloc(),
         child: BlocBuilder<ProfileGiftBloc, ProfileGiftState>(
             builder: (context, state) {
+          print(state);
           if (BlocProvider.of<ProfileGiftBloc>(context).state
               is SuccessProfileGiftState) {
             SuccessProfileGiftState successProfileGiftState =
@@ -57,17 +48,48 @@ class _profileGiftState extends State<ProfileGift>
                     as SuccessProfileGiftState;
             if (successProfileGiftState.gifts.length > 0) {
               gifts.addAll(successProfileGiftState.gifts);
-            } else {
-              stopLoadMore = true;
             }
+            BlocProvider.of<ProfileGiftBloc>(context)
+                .add(StopLoadMoreListEvent());
           } else if (BlocProvider.of<ProfileGiftBloc>(context).state
               is InitialProfileGiftState) {
-            BlocProvider.of<ProfileGiftBloc>(context).add(
-                GetGiftProfileList("5c616ee79a63451852a492b6", gifts.length));
+            _scrollController.addListener(() {
+              var triggerFetchMoreSize =
+                  0.9 * _scrollController.position.maxScrollExtent;
+              if (_scrollController.position.pixels > triggerFetchMoreSize) {
+                print(gifts.length);
+                print("pass");
+                BlocProvider.of<ProfileGiftBloc>(context).add(
+                    GetGiftProfileList(
+                        "5c616ee79a63451852a492b6", gifts.length));
+              }
+            });
           }
-          return Scrollbar(
-              child: CustomScrollView(
+          return CustomScrollView(
+            controller: _scrollController,
+            shrinkWrap: true,
             slivers: <Widget>[
+              SliverGrid(
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 3,
+                  mainAxisSpacing: 2.0,
+                  crossAxisSpacing: 2.0,
+                ),
+                delegate: SliverChildBuilderDelegate(
+                  (BuildContext context, int index) {
+                    return Container(
+                      decoration: BoxDecoration(
+                          color: Colors.grey,
+                          image: DecorationImage(
+                              fit: BoxFit.cover,
+                              image: NetworkImage(
+                                  AppConfig.of(context).endpoint +
+                                      gifts[index].image))),
+                    );
+                  },
+                  childCount: gifts.length,
+                ),
+              ),
               SliverPadding(
                   padding: EdgeInsets.all(0.0),
                   sliver: SliverList(
@@ -75,28 +97,6 @@ class _profileGiftState extends State<ProfileGift>
                       Column(
                         children: <Widget>[
                           //your widgets
-                          GridView.builder(
-                              shrinkWrap: true,
-                              itemCount: gifts.length,
-                              controller: _scrollController,
-                              gridDelegate:
-                                  SliverGridDelegateWithFixedCrossAxisCount(
-                                crossAxisCount: 3,
-                                mainAxisSpacing: 2.0,
-                                crossAxisSpacing: 2.0,
-                              ),
-                              itemBuilder: (BuildContext context, int index) {
-                                return Container(
-                                  decoration: BoxDecoration(
-                                      color: Colors.grey,
-                                      image: DecorationImage(
-                                          fit: BoxFit.cover,
-                                          image: NetworkImage(
-                                              "http://localhost:8080/" +
-                                                  gifts[index].image))),
-                                );
-                              }),
-
                           (BlocProvider.of<ProfileGiftBloc>(context).state
                                       is LoadingProfileGiftState &&
                                   stopLoadMore == false)
@@ -111,7 +111,7 @@ class _profileGiftState extends State<ProfileGift>
                     ]),
                   ))
             ],
-          ));
+          );
         }));
   }
 }

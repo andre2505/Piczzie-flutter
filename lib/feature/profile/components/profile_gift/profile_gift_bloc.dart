@@ -16,10 +16,13 @@ class ProfileGiftBloc extends Bloc<ProfileGiftEvent, ProfileGiftState> {
   Stream<ProfileGiftState> mapEventToState(ProfileGiftEvent event) async* {
     if (event is GetGiftProfileList) {
       yield* _mapLoadProfileGiftState(event);
+    } else if (event is StopLoadMoreListEvent) {
+      yield StopLoadMoreState();
     }
   }
 
-  Stream<ProfileGiftState> _mapLoadProfileGiftState(GetGiftProfileList event) async* {
+  Stream<ProfileGiftState> _mapLoadProfileGiftState(
+      GetGiftProfileList event) async* {
     yield LoadingProfileGiftState();
     try {
       final gifts = await _giftRepository.getListGift(event.id, event.offset);

@@ -39,3 +39,11 @@ class ErrorProfileGiftState extends ProfileGiftState {
   @override
   List<Object> get props => [message];
 }
+
+class StopLoadMoreState extends ProfileGiftState {
+
+  const StopLoadMoreState();
+
+  @override
+  List<Object> get props => null;
+}

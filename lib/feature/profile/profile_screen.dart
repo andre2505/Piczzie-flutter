@@ -22,7 +22,7 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _profileScreenState extends State<ProfileScreen>
-    with SingleTickerProviderStateMixin {
+    with SingleTickerProviderStateMixin, AutomaticKeepAliveClientMixin {
   TabController _tabController;
   int _index;
 
@@ -33,6 +33,9 @@ class _profileScreenState extends State<ProfileScreen>
     _index = 0;
     _tabController.addListener(_changeIndex);
   }
+
+  @override
+  bool get wantKeepAlive => true;
 
   _changeIndex() {
     setState(() {
