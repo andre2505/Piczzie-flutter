@@ -1,4 +1,6 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:piczzie/configuration/app_config.dart';
 import 'package:piczzie/service/service_locator.dart';
 import 'package:piczzie/service/user_session.dart';
 
@@ -8,8 +10,9 @@ class BaseRepository {
   Dio dio;
   String token;
   String refreshToken;
+  BuildContext context;
 
-  BaseRepository() {
+  BaseRepository(this.context) {
     initInstanceApi();
   }
 
@@ -21,7 +24,7 @@ class BaseRepository {
 
   _initApi() {
     dio = Dio();
-    dio.options.baseUrl = "http://localhost:8080/";
+    dio.options.baseUrl = AppConfig.of(context).endpoint;
     dio.options.headers['Authorization'] = "bearer " + token;
     dio.options.headers['content-type'] = "application/x-www-form-urlencoded";
     dio.options.connectTimeout = 30000; //5s

@@ -1,11 +1,8 @@
 import 'dart:async';
 
-
 import 'package:bloc/bloc.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:piczzie/feature/home/home_view.dart';
 import 'package:piczzie/feature/main/main_event.dart';
 import 'package:piczzie/feature/main/main_state.dart';
 

@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:piczzie/components/dialogs.dart';
+import 'package:piczzie/configuration/app_config.dart';
 import 'package:piczzie/feature/login/login_bloc.dart';
 import 'package:piczzie/feature/login/login_event.dart';
 import 'package:piczzie/feature/login/login_state.dart';
 import 'package:piczzie/localization/localization.dart';
 import 'package:piczzie/model/user.dart';
+import 'package:piczzie/ressources/color.dart';
 
 class LoginView extends StatefulWidget {
   LoginView({Key key, this.title}) : super(key: key);
@@ -23,16 +25,10 @@ class _loginViewState extends State<LoginView> {
   Widget build(BuildContext context) {
     return Stack(children: [
       Container(
-        color: Colors.deepPurple,
+        color: CustomColors.greenCustom,
         child: SafeArea(
           bottom: false,
-          child: Container(
-              height: double.infinity,
-              decoration: BoxDecoration(
-                  image: DecorationImage(
-                image: AssetImage("resources/assets/6443.jpg"),
-                fit: BoxFit.cover,
-              ))),
+          child: Container(color: Colors.grey[100]),
         ),
       ),
       Scaffold(
@@ -61,7 +57,7 @@ class _loginViewState extends State<LoginView> {
               return Container(
                   padding: EdgeInsets.all(20),
                   child: Card(
-                      elevation: 10,
+                      elevation: 5,
                       child: Padding(
                           padding: EdgeInsets.all(20),
                           child: Column(

@@ -1,37 +1,28 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:piczzie/feature/home/home_view.dart';
 import 'package:piczzie/feature/login/login_view.dart';
-import 'package:piczzie/feature/main/main_bloc.dart';
 import 'package:piczzie/localization/localization.dart';
 import 'package:piczzie/ressources/color.dart';
+import 'package:piczzie/service/base_network/base_repository.dart';
 import 'package:piczzie/service/service_locator.dart';
 import 'package:piczzie/service/base_network/navigation_service.dart';
+import 'configuration/app_config.dart';
 
-void main() {
-  setupLocator();
-  runApp(
-    BlocProvider(
-      create: (context) {
-        return MainBloc(context);
-      },
-      child: App(),
-    ),
-  );
-}
 
 class App extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    locator.registerLazySingleton<BaseRepository>(() => BaseRepository(context));
     return MaterialApp(
-      title: 'Picczie',
+      title: AppConfig.of(context).appTitle,
       theme: ThemeData(
         // is not restarted.
         primarySwatch: CustomColors.greenCustom,
+        highlightColor: Colors.transparent,
+        splashColor: Colors.transparent
       ),
       localizationsDelegates: [
         GlobalMaterialLocalizations.delegate,

@@ -7,9 +7,10 @@ import 'package:piczzie/service/repository/user_service.dart';
 
 GetIt locator = GetIt.instance;
 
+
 void setupLocator() {
+  locator.allowReassignment = true;
   // Register services
-  locator.registerLazySingleton<BaseRepository>(() => BaseRepository());
   locator.registerLazySingleton<UserService>(() => UserService());
   locator.registerLazySingleton<GiftRepository>(() => GiftRepository());
   locator.registerLazySingleton(() => NavigationService());
