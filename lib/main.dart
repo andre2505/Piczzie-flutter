@@ -1,9 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:intl/intl.dart';
 import 'package:piczzie/feature/home/home_view.dart';
 import 'package:piczzie/feature/login/login_view.dart';
-import 'package:piczzie/localization/localization.dart';
+import 'package:piczzie/l10n//localization/localization.dart';
 import 'package:piczzie/ressources/color.dart';
 import 'package:piczzie/service/base_network/base_repository.dart';
 import 'package:piczzie/service/service_locator.dart';
@@ -27,10 +28,11 @@ class App extends StatelessWidget {
       localizationsDelegates: [
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
-        const AppLocalizationsDelegate(),
+        AppLocalizationsDelegate(),
       ],
       supportedLocales: [
         const Locale('fr', ''),
+        const Locale('en', ''),
         const Locale('messages', '')
       ],
       navigatorKey: locator<NavigationService>().navigatorKey,

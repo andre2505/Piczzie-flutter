@@ -5,7 +5,7 @@ import 'package:piczzie/configuration/app_config.dart';
 import 'package:piczzie/feature/login/login_bloc.dart';
 import 'package:piczzie/feature/login/login_event.dart';
 import 'package:piczzie/feature/login/login_state.dart';
-import 'package:piczzie/localization/localization.dart';
+import 'package:piczzie/l10n//localization/localization.dart';
 import 'package:piczzie/model/user.dart';
 import 'package:piczzie/ressources/color.dart';
 
