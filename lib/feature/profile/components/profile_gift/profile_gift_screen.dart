@@ -57,8 +57,6 @@ class _profileGiftState extends State<ProfileGift>
               var triggerFetchMoreSize =
                   0.9 * _scrollController.position.maxScrollExtent;
               if (_scrollController.position.pixels > triggerFetchMoreSize) {
-                print(gifts.length);
-                print("pass");
                 BlocProvider.of<ProfileGiftBloc>(context).add(
                     GetGiftProfileList(
                         "5c616ee79a63451852a492b6", gifts.length));
@@ -90,26 +88,24 @@ class _profileGiftState extends State<ProfileGift>
                   childCount: gifts.length,
                 ),
               ),
-              SliverPadding(
-                  padding: EdgeInsets.all(0.0),
-                  sliver: SliverList(
-                    delegate: SliverChildListDelegate([
-                      Column(
-                        children: <Widget>[
-                          //your widgets
-                          (BlocProvider.of<ProfileGiftBloc>(context).state
-                                      is LoadingProfileGiftState &&
-                                  stopLoadMore == false)
-                              ? Center(
-                                  child: Container(
-                                      margin: EdgeInsets.only(top: 10),
-                                      child: CircularProgressIndicator()),
-                                )
-                              : SizedBox.shrink()
-                        ],
-                      )
-                    ]),
-                  ))
+              SliverList(
+                delegate: SliverChildListDelegate([
+                  Column(
+                    children: <Widget>[
+                      //your widgets
+                      (BlocProvider.of<ProfileGiftBloc>(context).state
+                                  is LoadingProfileGiftState &&
+                              stopLoadMore == false)
+                          ? Center(
+                              child: Container(
+                                  margin: EdgeInsets.only(top: 10),
+                                  child: CircularProgressIndicator()),
+                            )
+                          : SizedBox.shrink()
+                    ],
+                  )
+                ]),
+              )
             ],
           );
         }));

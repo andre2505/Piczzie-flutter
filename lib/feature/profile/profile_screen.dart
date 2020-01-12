@@ -2,10 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:piczzie/feature/login/login_view.dart';
-import 'package:piczzie/feature/profile/components/profile_gift/profile_gift_bloc.dart';
-import 'package:piczzie/feature/profile/components/profile_gift/profile_gift_event.dart';
 import 'package:piczzie/feature/profile/components/profile_gift/profile_gift_screen.dart';
-import 'package:piczzie/feature/profile/components/profile_gift/profile_gift_state.dart';
 import 'package:piczzie/feature/profile/components/profile_informations.dart';
 import 'package:piczzie/feature/profile/profile_bloc.dart';
 import 'package:piczzie/feature/profile/profile_state.dart';
@@ -37,11 +34,6 @@ class _profileScreenState extends State<ProfileScreen>
   @override
   bool get wantKeepAlive => true;
 
-  _changeIndex() {
-    setState(() {
-      _index = _tabController.index;
-    });
-  }
 
   @override
   void dispose() {
@@ -86,6 +78,7 @@ class _profileScreenState extends State<ProfileScreen>
                               width: 1,
                               style: BorderStyle.solid))),
                   child: TabBar(
+                    indicatorWeight: 5,
                     indicatorColor: Colors.transparent,
                     controller: _tabController,
                     unselectedLabelColor: Colors.grey,
@@ -109,5 +102,11 @@ class _profileScreenState extends State<ProfileScreen>
             ]));
           })),
     );
+  }
+
+  _changeIndex() {
+    setState(() {
+      _index = _tabController.index;
+    });
   }
 }

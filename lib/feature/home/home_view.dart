@@ -22,6 +22,12 @@ class _homeViewState extends State<HomeView> {
   final _notificationScreen = GlobalKey<NavigatorState>();
   final _profileScreen = GlobalKey<NavigatorState>();
 
+  bool initHomeScreen =false;
+  bool initSearchScreen = false;
+  bool initGalleryScreen = false;
+  bool initNotificationScreen = false;
+  bool initProfileScreen = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,40 +36,48 @@ class _homeViewState extends State<HomeView> {
         children: <Widget>[
           Navigator(
             key: _homeScreen,
-            onGenerateRoute: (route) => MaterialPageRoute(
-                settings: route, builder: (context) => LoginView()),
+            onGenerateRoute: (route) =>
+                MaterialPageRoute(
+                    settings: route, builder: (context) => LoginView()),
           ),
           Navigator(
             key: _searchScreen,
-            onGenerateRoute: (route) => MaterialPageRoute(
-                settings: route, builder: (context) => LoginView()),
+            onGenerateRoute: (route) =>
+                MaterialPageRoute(
+                    settings: route, builder: (context) => LoginView()),
           ),
           Navigator(
             key: _galleryScreen,
-            onGenerateRoute: (route) => MaterialPageRoute(
-                settings: route, builder: (context) => LoginView()),
+            onGenerateRoute: (route) =>
+                MaterialPageRoute(
+                    settings: route, builder: (context) => LoginView()),
           ),
           Navigator(
             key: _notificationScreen,
-            onGenerateRoute: (route) => MaterialPageRoute(
-                settings: route, builder: (context) => LoginView()),
+            onGenerateRoute: (route) =>
+                MaterialPageRoute(
+                    settings: route, builder: (context) => LoginView()),
           ),
           Navigator(
             key: _profileScreen,
-            onGenerateRoute: (route) => MaterialPageRoute(
-                settings: route,
-                builder: (context) {
-                  if (_selectedIndex == 4) {
-                    return ProfileScreen();
-                  }
-                  return SizedBox.shrink();
-                }),
+            onGenerateRoute: (route) =>
+                MaterialPageRoute(
+                    settings: route,
+                    builder: (context) {
+                      if (_selectedIndex == 4 || initProfileScreen) {
+                        initProfileScreen = true;
+                        return ProfileScreen();
+                      } else {
+                        return SizedBox.shrink();
+                      }
+                    }),
           )
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
           type: BottomNavigationBarType.fixed,
           unselectedItemColor: Colors.grey,
+          iconSize: 28,
           elevation: 10,
           items: [
             BottomNavigationBarItem(icon: Icon(Icons.home), title: Text("")),
