@@ -96,6 +96,7 @@ class _profileScreenState extends State<ProfileScreen>
                   )),
               Expanded(
                   child: TabBarView(
+                    physics: NeverScrollableScrollPhysics(),
                 controller: _tabController,
                 children: <Widget>[ProfileGift(), Text("slkmjkljlkmsf")],
               ))
