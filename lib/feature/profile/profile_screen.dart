@@ -71,48 +71,52 @@ class _profileScreenState extends State<ProfileScreen>
             if (state is InitialProfileState) {
               BlocProvider.of<ProfileBloc>(context)
                   .add(GetUserInformationEvent());
+              return Center(
+                child: CircularProgressIndicator(strokeWidth: 2.0),
+              );
+            } else if (state is SuccessUserProfileInformationtState) {
+              return Container(
+                  child: Column(children: [
+                ProfileInformations(user: state.user),
+                ProfileRelationshipScreen(),
+                Container(
+                    decoration: BoxDecoration(
+                        border: Border(
+                            top: BorderSide(
+                                color: Colors.grey[300],
+                                width: 1,
+                                style: BorderStyle.solid),
+                            bottom: BorderSide(
+                                color: Colors.grey[300],
+                                width: 1,
+                                style: BorderStyle.solid))),
+                    child: TabBar(
+                      indicatorWeight: 5,
+                      indicatorColor: Colors.transparent,
+                      controller: _tabController,
+                      unselectedLabelColor: Colors.grey,
+                      labelColor: Colors.pink,
+                      tabs: <Widget>[
+                        Tab(
+                            icon: Icon(
+                                _index == 0 ? Picons.plain_gift : Picons.gift)),
+                        Tab(
+                          icon: Icon(_index == 1
+                              ? Picons.favorite_heart_button
+                              : Picons.heart),
+                        ),
+                      ],
+                    )),
+                Expanded(
+                    child: TabBarView(
+                  physics: NeverScrollableScrollPhysics(),
+                  controller: _tabController,
+                  children: <Widget>[ProfileGift(user: state.user), Text("slkmjkljlkmsf")],
+                ))
+              ]));
+            } else {
+              return SizedBox.shrink();
             }
-            return Container(
-                child: Column(children: [
-              (state is SuccessUserProfileInformationtState)
-                  ? ProfileInformations(user: state.user)
-                  : SizedBox.shrink(),
-              ProfileRelationshipScreen(),
-              Container(
-                  decoration: BoxDecoration(
-                      border: Border(
-                          top: BorderSide(
-                              color: Colors.grey[300],
-                              width: 1,
-                              style: BorderStyle.solid),
-                          bottom: BorderSide(
-                              color: Colors.grey[300],
-                              width: 1,
-                              style: BorderStyle.solid))),
-                  child: TabBar(
-                    indicatorWeight: 5,
-                    indicatorColor: Colors.transparent,
-                    controller: _tabController,
-                    unselectedLabelColor: Colors.grey,
-                    labelColor: Colors.pink,
-                    tabs: <Widget>[
-                      Tab(
-                          icon: Icon(
-                              _index == 0 ? Picons.plain_gift : Picons.gift)),
-                      Tab(
-                        icon: Icon(_index == 1
-                            ? Picons.favorite_heart_button
-                            : Picons.heart),
-                      ),
-                    ],
-                  )),
-              Expanded(
-                  child: TabBarView(
-                physics: NeverScrollableScrollPhysics(),
-                controller: _tabController,
-                children: <Widget>[ProfileGift(), Text("slkmjkljlkmsf")],
-              ))
-            ]));
           })),
     );
   }

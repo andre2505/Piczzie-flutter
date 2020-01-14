@@ -6,9 +6,12 @@ import 'package:piczzie/feature/profile/components/profile_gift/profile_gift_sta
 import 'package:piczzie/feature/profile/components/profile_gift/profile_gift_bloc.dart';
 import 'package:piczzie/feature/profile/components/profile_gift/profile_gift_event.dart';
 import 'package:piczzie/model/gift.dart';
+import 'package:piczzie/model/user.dart';
 
 class ProfileGift extends StatefulWidget {
-  ProfileGift({Key key}) : super(key: key);
+  ProfileGift({Key key, this.user}) : super(key: key);
+
+  User user;
 
   @override
   _profileGiftState createState() => _profileGiftState();
@@ -18,7 +21,7 @@ class _profileGiftState extends State<ProfileGift>
     with AutomaticKeepAliveClientMixin {
   List<Gift> gifts = List<Gift>();
   ScrollController _scrollController =
-  ScrollController(initialScrollOffset: 10.0, keepScrollOffset: false);
+      ScrollController(initialScrollOffset: 10.0, keepScrollOffset: false);
   bool _isLoadmore = false;
 
   @override
@@ -41,108 +44,94 @@ class _profileGiftState extends State<ProfileGift>
         builder: (context) => ProfileGiftBloc(),
         child: BlocBuilder<ProfileGiftBloc, ProfileGiftState>(
             builder: (context, state) {
-              print(state);
-              if (BlocProvider
-                  .of<ProfileGiftBloc>(context)
-                  .state
+          print(state);
+          if (BlocProvider.of<ProfileGiftBloc>(context).state
               is SuccessProfileGiftState) {
-                SuccessProfileGiftState successProfileGiftState =
-                BlocProvider
-                    .of<ProfileGiftBloc>(context)
-                    .state
-                as SuccessProfileGiftState;
-                if (successProfileGiftState.gifts.length > 0) {
-                  gifts.addAll(successProfileGiftState.gifts);
-                }
-                BlocProvider.of<ProfileGiftBloc>(context)
-                    .add(StopLoadMoreListEvent());
-                _isLoadmore = true;
-              } else if (BlocProvider
-                  .of<ProfileGiftBloc>(context)
-                  .state
+            SuccessProfileGiftState successProfileGiftState =
+                BlocProvider.of<ProfileGiftBloc>(context).state
+                    as SuccessProfileGiftState;
+            if (successProfileGiftState.gifts.length > 0) {
+              gifts.addAll(successProfileGiftState.gifts);
+            }
+            BlocProvider.of<ProfileGiftBloc>(context)
+                .add(StopLoadMoreListEvent());
+            _isLoadmore = true;
+          } else if (BlocProvider.of<ProfileGiftBloc>(context).state
               is InitialProfileGiftState) {
-                _scrollController.addListener(() {
-                  var triggerFetchMoreSize =
-                      0.9 * _scrollController.position.maxScrollExtent;
-                  if (_scrollController.offset > triggerFetchMoreSize) {
-                    BlocProvider.of<ProfileGiftBloc>(context).add(
-                        GetGiftProfileList(
-                            "5c616ee79a63451852a492b6", gifts.length,
-                            _isLoadmore));
-                  }
-                });
+            _scrollController.addListener(() {
+              var triggerFetchMoreSize =
+                  0.9 * _scrollController.position.maxScrollExtent;
+              if (_scrollController.offset > triggerFetchMoreSize) {
+                BlocProvider.of<ProfileGiftBloc>(context).add(
+                    GetGiftProfileList(
+                        widget.user.id, gifts.length, _isLoadmore));
               }
-              return Stack(
-                children: <Widget>[
-                  (BlocProvider
-                      .of<ProfileGiftBloc>(context)
-                      .state
-                  is LoadingProfileGiftState && !_isLoadmore)
-                      ? Center(
-                    child: CircularProgressIndicator(strokeWidth: 2.0),
-                  )
-                      : SizedBox.shrink(),
-                  CustomScrollView(
-                    controller: _scrollController,
-                    shrinkWrap: true,
-                    slivers: <Widget>[
-                      SliverGrid(
-                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 3,
-                          mainAxisSpacing: 2.0,
-                          crossAxisSpacing: 2.0,
-                        ),
-                        delegate: SliverChildBuilderDelegate(
-                              (BuildContext context, int index) {
-                            return CachedNetworkImage(
-                              imageUrl: AppConfig
-                                  .of(context)
-                                  .endpoint +
-                                  gifts[index].image,
-                              imageBuilder: (context, imageProvider) =>
-                                  Container(
-                                      decoration: BoxDecoration(
-                                          color: Colors.grey,
-                                          image: DecorationImage(
-                                              fit: BoxFit.cover,
-                                              image: NetworkImage(
-                                                  AppConfig
-                                                      .of(context)
-                                                      .endpoint +
-                                                      gifts[index].image)))),
-                              placeholder: (context, url) => Icon(Icons.error),
-                              errorWidget: (context, url, error) =>
-                                  Icon(Icons.error),
-                            );
-                          },
-                          childCount: gifts.length,
-                        ),
-                      ),
-                      SliverList(
-                        delegate: SliverChildListDelegate([
-                          Column(
-                            children: <Widget>[
-                              //your widgets
-                              (BlocProvider
-                                  .of<ProfileGiftBloc>(context)
-                                  .state
-                              is LoadingProfileGiftState && _isLoadmore)
-                                  ? Center(
-                                child: Container(
-                                    margin: EdgeInsets.only(top: 10),
-                                    child: CircularProgressIndicator(
-                                      strokeWidth: 2.0,
-                                    )),
-                              )
-                                  : SizedBox.shrink()
-                            ],
-                          )
-                        ]),
+            });
+          }
+          return Stack(
+            children: <Widget>[
+              (BlocProvider.of<ProfileGiftBloc>(context).state
+                          is LoadingProfileGiftState &&
+                      !_isLoadmore)
+                  ? Center(
+                      child: CircularProgressIndicator(strokeWidth: 2.0),
+                    )
+                  : SizedBox.shrink(),
+              CustomScrollView(
+                controller: _scrollController,
+                shrinkWrap: true,
+                slivers: <Widget>[
+                  SliverGrid(
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 3,
+                      mainAxisSpacing: 2.0,
+                      crossAxisSpacing: 2.0,
+                    ),
+                    delegate: SliverChildBuilderDelegate(
+                      (BuildContext context, int index) {
+                        return CachedNetworkImage(
+                            imageUrl: AppConfig.of(context).endpoint +
+                                gifts[index].image,
+                            imageBuilder: (context, imageProvider) => Container(
+                                decoration: BoxDecoration(
+                                    color: Colors.grey,
+                                    image: DecorationImage(
+                                        fit: BoxFit.cover,
+                                        image: NetworkImage(
+                                            AppConfig.of(context).endpoint +
+                                                gifts[index].image)))),
+                            placeholder: (context, url) =>
+                                Container(color: Colors.grey),
+                            errorWidget: (context, url, error) =>
+                                Container(color: Colors.grey));
+                      },
+                      childCount: gifts.length,
+                    ),
+                  ),
+                  SliverList(
+                    delegate: SliverChildListDelegate([
+                      Column(
+                        children: <Widget>[
+                          //your widgets
+                          (BlocProvider.of<ProfileGiftBloc>(context).state
+                                      is LoadingProfileGiftState &&
+                                  _isLoadmore)
+                              ? Center(
+                                  child: Container(
+                                      margin: EdgeInsets.only(top: 10),
+                                      child: CircularProgressIndicator(
+                                        strokeWidth: 2.0,
+                                      )),
+                                )
+                              : SizedBox.shrink()
+                        ],
                       )
-                    ],
+                    ]),
                   )
                 ],
-              );
-            }));
+              )
+            ],
+          );
+        }));
   }
 }

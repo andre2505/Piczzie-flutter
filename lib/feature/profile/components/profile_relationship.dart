@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 
 class ProfileRelationshipScreen extends StatelessWidget {
-  ProfileRelationshipScreen({Key key, this.title}) : super(key: key);
-
-  String title;
+  ProfileRelationshipScreen({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
