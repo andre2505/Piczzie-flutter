@@ -92,6 +92,7 @@ class _profileScreenState extends State<ProfileScreen>
                                 style: BorderStyle.solid))),
                     child: TabBar(
                       indicatorWeight: 5,
+                      isScrollable: false,
                       indicatorColor: Colors.transparent,
                       controller: _tabController,
                       unselectedLabelColor: Colors.grey,

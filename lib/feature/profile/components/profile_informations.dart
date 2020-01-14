@@ -42,7 +42,7 @@ class _profileInformationsState extends State<ProfileInformations> {
                         fit: BoxFit.fill,
                         image: NetworkImage(
                             AppConfig.of(context).endpoint + "/$_userPhoto"))),
-              ),
+              ),Padding(padding: EdgeInsets.only(top: 10)),
               Text("sfdsf"),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,

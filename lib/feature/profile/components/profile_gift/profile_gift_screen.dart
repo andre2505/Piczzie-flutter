@@ -101,9 +101,9 @@ class _profileGiftState extends State<ProfileGift>
                                             AppConfig.of(context).endpoint +
                                                 gifts[index].image)))),
                             placeholder: (context, url) =>
-                                Container(color: Colors.grey),
+                                Container(color: Colors.grey[300]),
                             errorWidget: (context, url, error) =>
-                                Container(color: Colors.grey));
+                                Container(color: Colors.grey[300]));
                       },
                       childCount: gifts.length,
                     ),
@@ -118,7 +118,8 @@ class _profileGiftState extends State<ProfileGift>
                                   _isLoadmore)
                               ? Center(
                                   child: Container(
-                                      margin: EdgeInsets.only(top: 10),
+                                      margin:
+                                          EdgeInsets.only(top: 20, bottom: 20),
                                       child: CircularProgressIndicator(
                                         strokeWidth: 2.0,
                                       )),
