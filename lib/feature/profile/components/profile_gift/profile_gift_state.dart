@@ -47,10 +47,3 @@ class StopLoadMoreState extends ProfileGiftState {
   @override
   List<Object> get props => null;
 }
-
-class LoadingLoadMoreProfileGiftState extends ProfileGiftState {
-  const LoadingLoadMoreProfileGiftState();
-
-  @override
-  List<Object> get props => [];
-}

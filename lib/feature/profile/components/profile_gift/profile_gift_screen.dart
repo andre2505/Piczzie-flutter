@@ -18,7 +18,7 @@ class _profileGiftState extends State<ProfileGift>
     with AutomaticKeepAliveClientMixin {
   List<Gift> gifts = List<Gift>();
   ScrollController _scrollController =
-  ScrollController(initialScrollOffset: 5.0, keepScrollOffset: false);
+  ScrollController(initialScrollOffset: 10.0, keepScrollOffset: false);
   bool _isLoadmore = false;
 
   @override

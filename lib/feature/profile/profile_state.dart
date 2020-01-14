@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
-import 'package:piczzie/model/gift.dart';
 import 'package:piczzie/model/user.dart';
+
 
 @immutable
 abstract class ProfileState extends Equatable {
@@ -15,27 +15,13 @@ class InitialProfileState extends ProfileState {
   List<Object> get props => ['TodosLoading'];
 }
 
-class LoadingProfileState extends ProfileState {
-  const LoadingProfileState();
+class SuccessUserProfileInformationtState extends ProfileState {
+  final User user;
+
+  const SuccessUserProfileInformationtState(this.user);
 
   @override
-  List<Object> get props => ['TodosLoading'];
+  List<Object> get props => [user];
 }
 
-class SuccessProfileState extends ProfileState {
-  final List<Gift> gifts;
 
-  const SuccessProfileState(this.gifts);
-
-  @override
-  List<Object> get props => [gifts];
-}
-
-class ErrorProfileState extends ProfileState {
-  final String message;
-
-  const ErrorProfileState(this.message);
-
-  @override
-  List<Object> get props => [message];
-}

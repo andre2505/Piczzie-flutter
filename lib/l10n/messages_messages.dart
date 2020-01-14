@@ -25,6 +25,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "forgotten_password" : MessageLookupByLibrary.simpleMessage("Forgot your password ?"),
     "login" : MessageLookupByLibrary.simpleMessage("login"),
     "password" : MessageLookupByLibrary.simpleMessage("password"),
+    "profile" : MessageLookupByLibrary.simpleMessage("Profile"),
     "register" : MessageLookupByLibrary.simpleMessage("Register")
   };
 }

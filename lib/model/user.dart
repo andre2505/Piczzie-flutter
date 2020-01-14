@@ -7,7 +7,7 @@ part 'user.g.dart';
 class User {
   @nullable
   @JsonKey(name: '_id', includeIfNull: false)
-  final String id;
+  String id;
 
   @nullable
   @JsonKey(name: 'firstname', includeIfNull: false)
@@ -23,11 +23,11 @@ class User {
 
   @nullable
   @JsonKey(name: 'email', includeIfNull: false)
-  final String email;
+  String email;
 
   @nullable
   @JsonKey(name: 'password', includeIfNull: false)
-  final String password;
+  String password;
 
   @nullable
   @JsonKey(name: 'birthday', includeIfNull: false)
@@ -43,11 +43,11 @@ class User {
 
   @nullable
   @JsonKey(name: 'token', includeIfNull: false)
-  final String token;
+  String token;
 
   @nullable
   @JsonKey(name: 'refresh_token', includeIfNull: false)
-  final String refreshToken;
+  String refreshToken;
 
   @override
   User({this.id, this.email, this.password, this.token, this.refreshToken});

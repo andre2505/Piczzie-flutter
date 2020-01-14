@@ -5,6 +5,7 @@
   "email": "Email",
   "login": "Connexion",
   "forgotten_password": "mot de passe oublié ?",
-  "register": "s'inscrire"
+  "register": "s'inscrire",
+  "profile": "Profil"
 
 }

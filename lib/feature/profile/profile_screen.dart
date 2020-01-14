@@ -1,11 +1,14 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:piczzie/feature/login/login_view.dart';
 import 'package:piczzie/feature/profile/components/profile_gift/profile_gift_screen.dart';
 import 'package:piczzie/feature/profile/components/profile_informations.dart';
+import 'package:piczzie/feature/profile/components/profile_relationship.dart';
 import 'package:piczzie/feature/profile/profile_bloc.dart';
+import 'package:piczzie/feature/profile/profile_event.dart';
 import 'package:piczzie/feature/profile/profile_state.dart';
+import 'package:piczzie/l10n/localization/localization.dart';
+import 'package:piczzie/model/user.dart';
 import 'package:piczzie/ressources/color.dart';
 import 'package:piczzie/ressources/icons/picons.dart';
 
@@ -22,6 +25,7 @@ class _profileScreenState extends State<ProfileScreen>
     with SingleTickerProviderStateMixin, AutomaticKeepAliveClientMixin {
   TabController _tabController;
   int _index;
+  User user;
 
   @override
   void initState() {
@@ -33,7 +37,6 @@ class _profileScreenState extends State<ProfileScreen>
 
   @override
   bool get wantKeepAlive => true;
-
 
   @override
   void dispose() {
@@ -48,6 +51,8 @@ class _profileScreenState extends State<ProfileScreen>
       appBar: AppBar(
         backgroundColor: CustomColors.greenCustom,
         brightness: Brightness.dark,
+        title: Text(AppLocalizations().profile(),
+            style: TextStyle(color: Colors.white)),
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.settings),
@@ -63,9 +68,16 @@ class _profileScreenState extends State<ProfileScreen>
           builder: (context) => ProfileBloc(),
           child:
               BlocBuilder<ProfileBloc, ProfileState>(builder: (context, state) {
+            if (state is InitialProfileState) {
+              BlocProvider.of<ProfileBloc>(context)
+                  .add(GetUserInformationEvent());
+            }
             return Container(
                 child: Column(children: [
-              ProfileInformations(),
+              (state is SuccessUserProfileInformationtState)
+                  ? ProfileInformations(user: state.user)
+                  : SizedBox.shrink(),
+              ProfileRelationshipScreen(),
               Container(
                   decoration: BoxDecoration(
                       border: Border(
@@ -96,7 +108,7 @@ class _profileScreenState extends State<ProfileScreen>
                   )),
               Expanded(
                   child: TabBarView(
-                    physics: NeverScrollableScrollPhysics(),
+                physics: NeverScrollableScrollPhysics(),
                 controller: _tabController,
                 children: <Widget>[ProfileGift(), Text("slkmjkljlkmsf")],
               ))

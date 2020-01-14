@@ -23,11 +23,13 @@ class AppLocalizations {
 
   email() => Intl.message("email");
 
-  register()=> Intl.message("register");
+  register() => Intl.message("register");
 
   login() => Intl.message("login");
 
   forgottenPassword() => Intl.message("forgotten_password");
+
+  profile() => Intl.message("profile");
 }
 
 class AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
@@ -35,7 +37,7 @@ class AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
 
   @override
   bool isSupported(Locale locale) =>
-      ['en','fr', 'messages'].contains(locale.languageCode);
+      ['en', 'fr', 'messages'].contains(locale.languageCode);
 
   @override
   Future<AppLocalizations> load(Locale locale) => AppLocalizations.load(locale);

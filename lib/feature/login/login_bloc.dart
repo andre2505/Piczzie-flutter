@@ -33,8 +33,14 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         final user = await _userService.fetchUser(event.user);
         print(user.token);
         print(user.refreshToken);
+        print(user.id);
+        print(user.photo);
+
         UserSession.setTokenPreference(user.token);
         UserSession.setRefreshTokenPreference(user.refreshToken);
+        UserSession.setUserId(user.id);
+        UserSession.setUserPhoto(user.photo);
+
         yield SuccessLoginState(user);
       } catch (e) {
         print(e);
