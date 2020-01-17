@@ -78,7 +78,7 @@ class _profileScreenState extends State<ProfileScreen>
               return Container(
                   child: Column(children: [
                 ProfileInformations(user: state.user),
-                ProfileRelationshipScreen(),
+                ProfileRelationshipScreen(user: state.user, childs :state.child),
                 Container(
                     decoration: BoxDecoration(
                         border: Border(

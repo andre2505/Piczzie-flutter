@@ -5,7 +5,7 @@ import 'package:intl/intl.dart';
 import 'package:piczzie/feature/home/home_view.dart';
 import 'package:piczzie/feature/login/login_view.dart';
 import 'package:piczzie/feature/profile/profile_screen.dart';
-import 'package:piczzie/l10n//localization/localization.dart';
+import 'package:piczzie/l10n/localization/localization.dart';
 import 'package:piczzie/ressources/color.dart';
 import 'package:piczzie/service/base_network/base_repository.dart';
 import 'package:piczzie/service/service_locator.dart';
@@ -27,9 +27,9 @@ class App extends StatelessWidget {
         splashColor: Colors.transparent
       ),
       localizationsDelegates: [
+        const AppLocalizationsDelegate(),
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
-        AppLocalizationsDelegate(),
       ],
       supportedLocales: [
         const Locale('fr', ''),

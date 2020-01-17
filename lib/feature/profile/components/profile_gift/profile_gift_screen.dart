@@ -90,7 +90,7 @@ class _profileGiftState extends State<ProfileGift>
                     delegate: SliverChildBuilderDelegate(
                       (BuildContext context, int index) {
                         return CachedNetworkImage(
-                            imageUrl: AppConfig.of(context).endpoint +
+                            imageUrl: AppConfig.of(context).endpoint+'/' +
                                 gifts[index].image,
                             imageBuilder: (context, imageProvider) => Container(
                                 decoration: BoxDecoration(
@@ -98,7 +98,7 @@ class _profileGiftState extends State<ProfileGift>
                                     image: DecorationImage(
                                         fit: BoxFit.cover,
                                         image: NetworkImage(
-                                            AppConfig.of(context).endpoint +
+                                            AppConfig.of(context).endpoint+'/' +
                                                 gifts[index].image)))),
                             placeholder: (context, url) =>
                                 Container(color: Colors.grey[300]),

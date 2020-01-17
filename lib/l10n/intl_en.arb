@@ -6,5 +6,37 @@
   "login": "login",
   "forgotten_password": "Forgot your password ?",
   "register": "Register",
-  "profile": "Profile"
+  "profile": "Profile",
+  "children": "{count} children",
+  "@children": {
+    "description": "children plurial",
+    "type": "text",
+    "placeholders": {
+      "count":{}
+    }
+  },
+  "child": "{count} child",
+  "@child": {
+      "description": "child",
+      "type": "text",
+      "placeholders": {
+        "count":{}
+      }
+    },
+  "friends": "{count} friends",
+  "@friends": {
+     "description": "many friends",
+     "type": "text",
+     "placeholders": {
+        "count": {}
+     }
+  },
+  "friend": "{count} friend",
+  "@friend": {
+    "description": "one friends",
+    "type": "text",
+    "placeholders": {
+        "count": {}
+       }
+    }
 }

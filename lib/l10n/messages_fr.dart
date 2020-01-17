@@ -19,10 +19,22 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'fr';
 
+  static m0(count) => "${count} enfant";
+
+  static m1(count) => "${count} enfants";
+
+  static m2(count) => "${count} ami";
+
+  static m3(count) => "${count} amis";
+
   final messages = _notInlinedMessages(_notInlinedMessages);
   static _notInlinedMessages(_) => <String, Function> {
+    "child" : m0,
+    "children" : m1,
     "email" : MessageLookupByLibrary.simpleMessage("Email"),
     "forgotten_password" : MessageLookupByLibrary.simpleMessage("mot de passe oublié ?"),
+    "friend" : m2,
+    "friends" : m3,
     "login" : MessageLookupByLibrary.simpleMessage("Connexion"),
     "password" : MessageLookupByLibrary.simpleMessage("Mot de passe"),
     "profile" : MessageLookupByLibrary.simpleMessage("Profil"),

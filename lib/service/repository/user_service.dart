@@ -11,6 +11,18 @@ class UserService {
   Future<User> fetchUser(User user) async {
     final response =
         await _dio.getInstance().post('/login', data: user.toJson());
+    print(response.data);
     return User.fromJson(response.data);
+  }
+
+  Future<List<Response>> getAllInformationsUser(String id, int offset) async {
+    final response = await Future.wait([
+      _dio
+          .getInstance()
+          .get("/api/gift/user/$id", queryParameters: {"offset": offset}),
+      _dio.getInstance().get("/api/child/children/$id"),
+      _dio.getInstance().get("/api/user/$id")
+    ]);
+    return response;
   }
 }

@@ -30,6 +30,30 @@ class AppLocalizations {
   forgottenPassword() => Intl.message("forgotten_password");
 
   profile() => Intl.message("profile");
+
+  children(String count) => Intl.message(
+      "$count children",
+      name: 'children',
+      args: [count]
+  );
+
+  child(String count) => Intl.message(
+      "$count child",
+      name: 'child',
+      args: [count]
+  );
+
+  friends(String count) => Intl.message(
+      "$count friends",
+      name: 'friends',
+      args: [count]
+  );
+
+  friend(String count) => Intl.message(
+      "$count friend",
+      name: 'friend',
+      args: [count]
+  );
 }
 
 class AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

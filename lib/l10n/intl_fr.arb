@@ -6,6 +6,37 @@
   "login": "Connexion",
   "forgotten_password": "mot de passe oublié ?",
   "register": "s'inscrire",
-  "profile": "Profil"
-
+  "profile": "Profil",
+  "children": "{count} enfants",
+  "@children": {
+    "description": "children plurial",
+    "type": "text",
+    "placeholders": {
+      "count":{}
+    }
+  },
+  "child": "{count} enfant",
+  "@child": {
+    "description": "child",
+    "type": "text",
+    "placeholders": {
+        "count":{}
+      }
+    },
+  "friends": "{count} amis",
+  "@friends": {
+     "description": "many friends",
+     "type": "text",
+     "placeholders": {
+        "count": {}
+     }
+  },
+  "friend": "{count} ami",
+  "@friend": {
+    "description": "one friends",
+    "type": "text",
+    "placeholders": {
+        "count": {}
+       }
+    }
 }

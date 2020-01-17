@@ -5,6 +5,7 @@ class UserSession {
   static final String KEY_REFRESH_TOKEN = "key_refresh_token";
   static final String KEY_ID = "key_id";
   static final String KEY_PHOTO = "key_photo";
+  static final String KEY_BIRTHDAY = "key_birthay";
 
   static void setTokenPreference(String token) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -26,7 +27,7 @@ class UserSession {
     return prefs.getString(KEY_REFRESH_TOKEN);
   }
 
-  static void setUserId(String id) async{
+  static void setUserId(String id) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setString(KEY_ID, id);
   }
@@ -36,7 +37,7 @@ class UserSession {
     return prefs.getString(KEY_ID);
   }
 
-  static void setUserPhoto(String path) async{
+  static void setUserPhoto(String path) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setString(KEY_PHOTO, path);
   }
@@ -46,4 +47,13 @@ class UserSession {
     return prefs.getString(KEY_PHOTO);
   }
 
+  static void setUserBirthday(String date) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setString(KEY_BIRTHDAY, date);
+  }
+
+  static Future<String> getUserBirthday() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getString(KEY_BIRTHDAY);
+  }
 }
