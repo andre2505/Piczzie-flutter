@@ -1,4 +1,6 @@
 PODS:
+  - camera (0.0.1):
+    - Flutter
   - connectivity (0.0.1):
     - Flutter
     - Reachability
@@ -6,6 +8,11 @@ PODS:
   - FMDB (2.7.5):
     - FMDB/standard (= 2.7.5)
   - FMDB/standard (2.7.5)
+  - image_crop (0.0.1):
+    - Flutter
+  - image_cropper (0.0.2):
+    - Flutter
+    - TOCropViewController (~> 2.5.2)
   - path_provider (0.0.1):
     - Flutter
   - Reachability (3.2)
@@ -18,10 +25,14 @@ PODS:
   - sqflite (0.0.1):
     - Flutter
     - FMDB (~> 2.7.2)
+  - TOCropViewController (2.5.2)
 
 DEPENDENCIES:
+  - camera (from `.symlinks/plugins/camera/ios`)
   - connectivity (from `.symlinks/plugins/connectivity/ios`)
   - Flutter (from `Flutter`)
+  - image_crop (from `.symlinks/plugins/image_crop/ios`)
+  - image_cropper (from `.symlinks/plugins/image_cropper/ios`)
   - path_provider (from `.symlinks/plugins/path_provider/ios`)
   - shared_preferences (from `.symlinks/plugins/shared_preferences/ios`)
   - shared_preferences_macos (from `.symlinks/plugins/shared_preferences_macos/ios`)
@@ -32,12 +43,19 @@ SPEC REPOS:
   trunk:
     - FMDB
     - Reachability
+    - TOCropViewController
 
 EXTERNAL SOURCES:
+  camera:
+    :path: ".symlinks/plugins/camera/ios"
   connectivity:
     :path: ".symlinks/plugins/connectivity/ios"
   Flutter:
     :path: Flutter
+  image_crop:
+    :path: ".symlinks/plugins/image_crop/ios"
+  image_cropper:
+    :path: ".symlinks/plugins/image_cropper/ios"
   path_provider:
     :path: ".symlinks/plugins/path_provider/ios"
   shared_preferences:
@@ -50,15 +68,19 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/sqflite/ios"
 
 SPEC CHECKSUMS:
+  camera: 38cc83ae9a5667bb5a71c7d9edaf60a91920fd4e
   connectivity: 6e94255659cc86dcbef1d452ad3e0491bb1b3e75
   Flutter: 0e3d915762c693b495b44d77113d4970485de6ec
   FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
+  image_crop: e0a67085d3ebf3cf46ca46d61c53a082507b0bc3
+  image_cropper: 3c16d7651730ffe85897f5a1c4e2547e6b54989a
   path_provider: fb74bd0465e96b594bb3b5088ee4a4e7bb1f2a9d
   Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
   shared_preferences: 430726339841afefe5142b9c1f50cb6bd7793e01
   shared_preferences_macos: f3f29b71ccbb56bf40c9dd6396c9acf15e214087
   shared_preferences_web: 141cce0c3ed1a1c5bf2a0e44f52d31eeb66e5ea9
   sqflite: 4001a31ff81d210346b500c55b17f4d6c7589dd0
+  TOCropViewController: e9da34f484aedd4e5d5a8ab230ba217cfe16c729
 
 PODFILE CHECKSUM: 1b66dae606f75376c5f2135a8290850eeb09ae83
 

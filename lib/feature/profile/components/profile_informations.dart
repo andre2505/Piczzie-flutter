@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:piczzie/configuration/app_config.dart';
 import 'package:piczzie/model/user.dart';
 import 'package:piczzie/service/user_session.dart';
@@ -42,8 +43,9 @@ class _profileInformationsState extends State<ProfileInformations> {
                         fit: BoxFit.fill,
                         image: NetworkImage(
                             AppConfig.of(context).endpoint + "/$_userPhoto"))),
-              ),Padding(padding: EdgeInsets.only(top: 10)),
-              Text("sfdsf"),
+              ),
+              Padding(padding: EdgeInsets.only(top: 10)),
+              Text(widget.user.lastname + " " + widget.user.firstname),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
@@ -51,7 +53,7 @@ class _profileInformationsState extends State<ProfileInformations> {
                   SizedBox(width: 10),
                   Padding(
                       padding: EdgeInsets.only(top: 5),
-                      child: Text("sdfsfsf sfsfdsfs",
+                      child: Text(DateFormat.yMMMMd().format(widget.user.birthday),
                           textAlign: TextAlign.justify))
                 ],
               ),

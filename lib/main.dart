@@ -5,6 +5,7 @@ import 'package:intl/intl.dart';
 import 'package:piczzie/feature/home/home_view.dart';
 import 'package:piczzie/feature/login/login_view.dart';
 import 'package:piczzie/feature/profile/profile_screen.dart';
+import 'package:piczzie/feature/tab_view/tab_view.dart';
 import 'package:piczzie/l10n/localization/localization.dart';
 import 'package:piczzie/ressources/color.dart';
 import 'package:piczzie/service/base_network/base_repository.dart';
@@ -37,7 +38,7 @@ class App extends StatelessWidget {
         const Locale('messages', '')
       ],
       navigatorKey: locator<NavigationService>().navigatorKey,
-      home: HomeView(),
+      home: TabView(),
       initialRoute: '/',
       routes: <String, WidgetBuilder>{
         "/login": (BuildContext context) => LoginView(),
