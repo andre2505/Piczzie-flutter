@@ -5,6 +5,8 @@ PODS:
     - Flutter
     - Reachability
   - Flutter (1.0.0)
+  - flutter_lantern (0.0.1):
+    - Flutter
   - FMDB (2.7.5):
     - FMDB/standard (= 2.7.5)
   - FMDB/standard (2.7.5)
@@ -26,11 +28,14 @@ PODS:
     - Flutter
     - FMDB (~> 2.7.2)
   - TOCropViewController (2.5.2)
+  - torch (0.0.1):
+    - Flutter
 
 DEPENDENCIES:
   - camera (from `.symlinks/plugins/camera/ios`)
   - connectivity (from `.symlinks/plugins/connectivity/ios`)
   - Flutter (from `Flutter`)
+  - flutter_lantern (from `.symlinks/plugins/flutter_lantern/ios`)
   - image_crop (from `.symlinks/plugins/image_crop/ios`)
   - image_cropper (from `.symlinks/plugins/image_cropper/ios`)
   - path_provider (from `.symlinks/plugins/path_provider/ios`)
@@ -38,6 +43,7 @@ DEPENDENCIES:
   - shared_preferences_macos (from `.symlinks/plugins/shared_preferences_macos/ios`)
   - shared_preferences_web (from `.symlinks/plugins/shared_preferences_web/ios`)
   - sqflite (from `.symlinks/plugins/sqflite/ios`)
+  - torch (from `.symlinks/plugins/torch/ios`)
 
 SPEC REPOS:
   trunk:
@@ -52,6 +58,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/connectivity/ios"
   Flutter:
     :path: Flutter
+  flutter_lantern:
+    :path: ".symlinks/plugins/flutter_lantern/ios"
   image_crop:
     :path: ".symlinks/plugins/image_crop/ios"
   image_cropper:
@@ -66,11 +74,14 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/shared_preferences_web/ios"
   sqflite:
     :path: ".symlinks/plugins/sqflite/ios"
+  torch:
+    :path: ".symlinks/plugins/torch/ios"
 
 SPEC CHECKSUMS:
   camera: 38cc83ae9a5667bb5a71c7d9edaf60a91920fd4e
   connectivity: 6e94255659cc86dcbef1d452ad3e0491bb1b3e75
   Flutter: 0e3d915762c693b495b44d77113d4970485de6ec
+  flutter_lantern: 5258f4a20e463703879569110ddff9348c350014
   FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
   image_crop: e0a67085d3ebf3cf46ca46d61c53a082507b0bc3
   image_cropper: 3c16d7651730ffe85897f5a1c4e2547e6b54989a
@@ -81,6 +92,7 @@ SPEC CHECKSUMS:
   shared_preferences_web: 141cce0c3ed1a1c5bf2a0e44f52d31eeb66e5ea9
   sqflite: 4001a31ff81d210346b500c55b17f4d6c7589dd0
   TOCropViewController: e9da34f484aedd4e5d5a8ab230ba217cfe16c729
+  torch: f4e3e6f4bcd69b927502bdbfe0c11044a659787d
 
 PODFILE CHECKSUM: 1b66dae606f75376c5f2135a8290850eeb09ae83
 

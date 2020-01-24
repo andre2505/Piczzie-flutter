@@ -4,6 +4,8 @@ import 'package:piczzie/feature/camera/camera_screen.dart';
 import 'package:piczzie/feature/login/login_view.dart';
 import 'package:piczzie/feature/profile/profile_screen.dart';
 import 'package:piczzie/ressources/color.dart';
+import 'package:piczzie/service/base_network/navigation_service.dart';
+import 'package:piczzie/service/service_locator.dart';
 
 class HomeView extends StatefulWidget {
   HomeView({Key key, this.title}) : super(key: key);
@@ -28,8 +30,7 @@ class _homeViewState extends State<HomeView> {
           icon: Icon(Icons.photo_camera),
           color: Colors.white,
           onPressed: () {
-            Navigator.of(context)
-                .push(MaterialPageRoute(builder: (context) => CameraScreen()));
+            locator<NavigationService>().pushTo('/camera');
           },
         )
       ],

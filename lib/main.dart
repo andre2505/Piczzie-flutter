@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:intl/intl.dart';
+import 'package:piczzie/feature/camera/camera_screen.dart';
 import 'package:piczzie/feature/home/home_view.dart';
 import 'package:piczzie/feature/login/login_view.dart';
 import 'package:piczzie/feature/profile/profile_screen.dart';
@@ -22,6 +23,7 @@ class App extends StatelessWidget {
     return MaterialApp(
       title: AppConfig.of(context).appTitle,
       theme: ThemeData(
+        primaryIconTheme: IconThemeData(color: Colors.white),
         // is not restarted.
         primarySwatch: CustomColors.greenCustom,
         highlightColor: Colors.transparent,
@@ -43,7 +45,8 @@ class App extends StatelessWidget {
       routes: <String, WidgetBuilder>{
         "/login": (BuildContext context) => LoginView(),
         "/homeView": (BuildContext context) => HomeView(),
-        "/profile" : (BuildContext context) => ProfileScreen()
+        "/profile" : (BuildContext context) => ProfileScreen(),
+        "/camera" : (BuildContext context) => CameraScreen()
       },
     );
   }
