@@ -15,12 +15,6 @@ void main() {
   );
 
   return runApp(
-    BlocProvider(
-      create: (context) {
-        return MainBloc(context);
-      },
-      child: configureApp,
-    ),
+    configureApp,
   );
 }
-

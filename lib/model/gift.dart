@@ -8,43 +8,43 @@ part 'gift.g.dart';
 class Gift {
   @nullable
   @JsonKey(name: '_id', includeIfNull: false)
-  final String id;
+  String id;
 
   @nullable
   @JsonKey(includeIfNull: false)
-  final String description;
+  String description;
 
   @nullable
   @JsonKey(includeIfNull: false)
-  final double price;
+  double price;
 
   @nullable
   @JsonKey(includeIfNull: false)
-  final String place;
+  String place;
 
   @nullable
   @JsonKey(includeIfNull: false)
-  final String website;
+  String website;
 
   @nullable
   @JsonKey(includeIfNull: false)
-  final DateTime date;
+  DateTime date;
 
   @nullable
   @JsonKey(includeIfNull: false)
-  final String image;
+  String image;
 
   @nullable
   @JsonKey(includeIfNull: false)
-  final User user;
+  User user;
 
   @nullable
   @JsonKey(name: 'user_reserved', includeIfNull: false)
-  final User userReserved;
+  User userReserved;
 
   @nullable
   @JsonKey(name: 'user_request', includeIfNull: false)
-  final User userRequest;
+  User userRequest;
 
   @override
   Gift(

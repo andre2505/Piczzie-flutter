@@ -31,29 +31,27 @@ class AppLocalizations {
 
   profile() => Intl.message("profile");
 
-  children(String count) => Intl.message(
-      "$count children",
-      name: 'children',
-      args: [count]
-  );
+  children(String count) =>
+      Intl.message("$count children", name: 'children', args: [count]);
 
-  child(String count) => Intl.message(
-      "$count child",
-      name: 'child',
-      args: [count]
-  );
+  child(String count) =>
+      Intl.message("$count child", name: 'child', args: [count]);
 
-  friends(String count) => Intl.message(
-      "$count friends",
-      name: 'friends',
-      args: [count]
-  );
+  friends(String count) =>
+      Intl.message("$count friends", name: 'friends', args: [count]);
 
-  friend(String count) => Intl.message(
-      "$count friend",
-      name: 'friend',
-      args: [count]
-  );
+  friend(String count) =>
+      Intl.message("$count friend", name: 'friend', args: [count]);
+
+  description() => Intl.message("description");
+
+  price() => Intl.message("price");
+
+  place() => Intl.message("place");
+
+  website() => Intl.message("website");
+
+  addGift() => Intl.message("Add");
 }
 
 class AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

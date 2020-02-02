@@ -38,5 +38,10 @@
     "placeholders": {
         "count": {}
        }
-    }
+    },
+  "description": "Description (ex : couleur, taille, etc…)",
+  "price": "Prix",
+  "website": "Site internet",
+  "place": "Lieu",
+  "add_gift": "Ajouter"
 }

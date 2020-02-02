@@ -17,6 +17,7 @@ class BaseRepository {
   }
 
   void initInstanceApi() async {
+    print(AppConfig.of(context).endpoint);
     token = await UserSession.getTokenPreference();
     refreshToken = await UserSession.getRefreshTokenPreference();
     _initApi();

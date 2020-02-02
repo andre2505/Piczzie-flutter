@@ -14,3 +14,16 @@ class InitialMainState extends MainState {
   List<Object> get props => ['Nothing'];
 }
 
+class SuccessAddGiftState extends MainState {
+  const SuccessAddGiftState();
+
+  @override
+  List<Object> get props => [];
+}
+
+class ErrorAddGiftState extends MainState {
+  const ErrorAddGiftState();
+
+  @override
+  List<Object> get props => [];
+}

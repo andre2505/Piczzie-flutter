@@ -1,6 +1,6 @@
 {
   "@@last_modified": "2019-12-28T18:43:25.987989",
-  "@@locale": "en",
+  "@@locale": "message",
   "password": "password",
   "email": "email",
   "login": "login",
@@ -17,7 +17,7 @@
   },
   "child": "{count} child",
   "@child": {
-      "description": "children plurial",
+      "description": "child",
       "type": "text",
       "placeholders": {
         "count":{}
@@ -38,5 +38,10 @@
     "placeholders": {
         "count": {}
        }
-    }
+    },
+  "description": "Description (ex : color, size, etc…)",
+  "price": "Price",
+  "website": "Website",
+  "place": "Place",
+  "add_gift": "Add"
 }

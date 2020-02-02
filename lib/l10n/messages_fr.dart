@@ -31,13 +31,17 @@ class MessageLookup extends MessageLookupByLibrary {
   static _notInlinedMessages(_) => <String, Function> {
     "child" : m0,
     "children" : m1,
+    "description" : MessageLookupByLibrary.simpleMessage("Description (ex : couleur, taille, etc…)"),
     "email" : MessageLookupByLibrary.simpleMessage("Email"),
     "forgotten_password" : MessageLookupByLibrary.simpleMessage("mot de passe oublié ?"),
     "friend" : m2,
     "friends" : m3,
     "login" : MessageLookupByLibrary.simpleMessage("Connexion"),
     "password" : MessageLookupByLibrary.simpleMessage("Mot de passe"),
+    "place" : MessageLookupByLibrary.simpleMessage("Lieu"),
+    "price" : MessageLookupByLibrary.simpleMessage("Prix"),
     "profile" : MessageLookupByLibrary.simpleMessage("Profil"),
-    "register" : MessageLookupByLibrary.simpleMessage("s\'inscrire")
+    "register" : MessageLookupByLibrary.simpleMessage("s\'inscrire"),
+    "website" : MessageLookupByLibrary.simpleMessage("Site internet")
   };
 }

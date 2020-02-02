@@ -181,6 +181,15 @@ class CameraScreenState extends State<CameraScreen> {
               aspectRatioPresets: [
                 CropAspectRatioPreset.square,
               ],
+              androidUiSettings: AndroidUiSettings(
+                lockAspectRatio: true,
+                activeControlsWidgetColor: Colors.grey,
+                hideBottomControls: true,
+                toolbarColor: Colors.black,
+                statusBarColor: Colors.black,
+                toolbarWidgetColor: Colors.white,
+                toolbarTitle: ""
+              ),
               iosUiSettings: IOSUiSettings(
                   rotateButtonsHidden: true,
                   resetButtonHidden: true,
